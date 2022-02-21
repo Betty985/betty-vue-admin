@@ -241,6 +241,11 @@ app.use(
 );
 ```
 
+# git
+
+强制推送到远程仓库 git push -f origin master
+变基 git rebase
+
 # 错误
 
 - `JSON.parse(window.localStorage.getItem(config.namespace) || "{}")`
