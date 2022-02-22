@@ -15,7 +15,7 @@ let app = createApp(App);
 Object.keys(Icons).forEach((key) => {
   app.component(key, Icons[key]);
 });
-app.use(ElementPlus);
+app.use(ElementPlus, { size: "small" });
 app.config.globalProperties.$api = api;
 app.config.globalProperties.$storage = storage;
 app.config.globalProperties.$request = request;

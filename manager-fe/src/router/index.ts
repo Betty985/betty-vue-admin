@@ -26,8 +26,8 @@ const routerArr = [
       {
         name: "user",
         // 如果要复用上一级的路径不要加"/"，不然会变成绝对路径
-        path: "user",
-        component: () => import("@v/Welcome.vue"),
+        path: "/user",
+        component: () => import("@v/user.vue"),
         meta: {
           title: "用户管理",
         },
