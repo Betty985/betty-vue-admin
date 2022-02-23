@@ -26,4 +26,20 @@ export default {
       mock: true,
     });
   },
+  getUserList(params) {
+    return request({
+      url: "/api/user/list",
+      method: "get",
+      data: params,
+      mock: true,
+    });
+  },
+  userDel(params) {
+    return request({
+      url: "/api/user/delete",
+      method: "post",
+      data: params,
+      mock: true,
+    });
+  },
 };
