@@ -1,42 +1,73 @@
 /**
- * Api 管理
+ * api管理
  */
-import request from "@u/request.js";
+import request from "./../utils/request";
 export default {
   login(params) {
     return request({
-      url: "/api/users/login",
+      url: "/users/login",
       method: "post",
       data: params,
     });
   },
   noticeCount(params) {
     return request({
-      url: "/api/leave/count",
+      url: "/leave/count",
       method: "get",
       data: {},
       mock: true,
     });
   },
-  getMenuList() {
+  getMenuList(params) {
     return request({
-      url: "/api/menu/list",
-      method: "get",
-      data: {},
-      mock: true,
-    });
-  },
-  getUserList(params) {
-    return request({
-      url: "/api/user/list",
+      url: "/menu/list",
       method: "get",
       data: params,
       mock: true,
     });
   },
+  getUserList(params) {
+    return request({
+      url: "/users/list",
+      method: "get",
+      data: params,
+      mock: false,
+    });
+  },
   userDel(params) {
     return request({
-      url: "/api/user/delete",
+      url: "/users/delete",
+      method: "post",
+      data: params,
+    });
+  },
+  getRoleList() {
+    return request({
+      url: "/roles/allList",
+      method: "get",
+      data: {},
+      mock: true,
+    });
+  },
+  getDeptList() {
+    return request({
+      url: "/dept/list",
+      method: "get",
+      data: {},
+      mock: true,
+    });
+  },
+  userSubmit(params) {
+    return request({
+      url: "/users/operate",
+      method: "post",
+      data: params,
+      mock: true,
+    });
+  },
+  menuSubmit(params) {
+    return request({
+      url: "/menu/operate",
       method: "post",
       data: params,
       mock: true,

@@ -22,8 +22,11 @@ export default defineConfig({
     //把mock设置为false,然后设置代理，进行数据联调
     proxy: {
       // 服务器端的接口
-      "/api": "http://localhost:3000",
-      // http://baidu.com/api/users/login
+      "/api": {
+        target: "http://localhost:3000/",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
     },
   },
 });

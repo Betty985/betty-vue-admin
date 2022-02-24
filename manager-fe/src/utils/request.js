@@ -39,7 +39,7 @@ service.interceptors.response.use((res) => {
     setTimeout(() => {
       let router = useRouter();
       router.push("/login");
-    }, 15000);
+    }, 1500);
     return Promise.reject(TOKEN_INVALED);
   } else {
     ElMessage.error(msg || NETWORK_ERROR);

@@ -1,19 +1,23 @@
 <script setup lang="ts">
 import { reactive, ref } from "@vue/reactivity";
 import { getCurrentInstance, onMounted } from "@vue/runtime-core";
-import { rmSync } from "fs";
+import utils from "@u/utils";
+import { toRaw } from "vue";
+
 // 获取Composition API的上下文对象
-const { ctx } = getCurrentInstance();
+const { proxy } = getCurrentInstance();
 // reactive一般创建引用类型，ref一般创建基本类型
 // 初始化用户表单对象
 const user = reactive({
-  userId: 101,
-  userName: "wes",
   state: 0,
 });
 // ref定义的对象通过.value进行赋值
 // 初始化用户列表
 const userList = ref([]);
+// 所有角色列表
+const roleList = ref([]);
+// 所有部门列表
+const deptList = ref([]);
 // 分页插件
 const pager = reactive({
   pageNum: 1,
@@ -29,14 +33,15 @@ const handleQuery = function () {
   getUserList();
 };
 // 重置查询表单
-const handleReset = () => {
-  ctx.$refs.form.resetFields();
+const handleReset = (form) => {
+  // 传参是为了动态重置，关闭弹窗的时候也可以重置
+  proxy.$refs[form].resetFields();
 };
 // 获取用户列表
 const getUserList = async () => {
   let params = { ...user, ...pager };
   try {
-    const { list, page } = await ctx.$api.getUserList(params);
+    const { list, page } = await proxy.$api.getUserList(params);
     userList.value = list;
     pager.total = page.total;
   } catch (error) {}
@@ -47,11 +52,6 @@ const rules = reactive({
     {
       require: true,
       message: "请输入用户名称",
-      trigger: "blur",
-    },
-    {
-      type: "number",
-      message: "类型必须为数字",
       trigger: "blur",
     },
   ],
@@ -118,15 +118,25 @@ const columns = reactive([
   {
     label: "注册时间",
     prop: "createTime",
+    width: 180,
+    formatter: (row, column, value) => {
+      return utils.formatDate(new Date(value));
+    },
   },
   {
     label: "最后登录时间",
     prop: "lastLoginTime",
+    width: 180,
+    formatter: (row, column, value) => {
+      return utils.formatDate(new Date(value));
+    },
   },
 ]);
 // 初始化接口调用
 onMounted(() => {
   getUserList();
+  getDeptList();
+  getRoleList();
 });
 // 分页事件处理
 let handleCurrentChange = (current) => {
@@ -135,10 +145,10 @@ let handleCurrentChange = (current) => {
 };
 // 用户单个删除
 let handleDel = async (row) => {
-  await ctx.$api.userDel({
+  await proxy.$api.userDel({
     userIds: [row.userId], //可单个删除，也可批量删除
   });
-  ctx.$message.success("删除成功");
+  proxy.$message.success("删除成功");
   // 刷新接口
   getUserList();
 };
@@ -147,18 +157,18 @@ const checkedUserIds = ref([]);
 // 批量删除
 const handlePatchDel = async () => {
   if (checkedUserIds.value.length == 0) {
-    ctx.$message.error("请选择要删除的用户");
+    proxy.$message.error("请选择要删除的用户");
     return;
   }
-  const res = await ctx.$api.userDel({
+  const res = await proxy.$api.userDel({
     userIds: [checkedUserIds.value], //可单个删除，也可批量删除
   });
   if (res.oModified > 0) {
-    ctx.$message.success("删除成功");
+    proxy.$message.success("删除成功");
     // 刷新接口
     getUserList();
   } else {
-    ctx.$message.error("删除失败");
+    proxy.$message.error("删除失败");
   }
 };
 // 表格多选
@@ -173,7 +183,57 @@ const handleSelectionChange = (list) => {
 const showModel = ref(false);
 // 用户新增
 const handleCreate = () => {
+  action.value = "add";
   showModel.value = true;
+};
+//定义用户操作类型
+const action = ref("add");
+// 用户编辑
+const handleEdit = (row) => {
+  action.value = "edit";
+  showModel.value = true;
+  // dom渲染完成再执行代码
+  proxy.$nextTick(() => {
+    // 浅拷贝
+    Object.assign(userForm, row);
+  });
+};
+// 获取部门列表
+const getDeptList = async () => {
+  let list = await proxy.$api.getDeptList();
+  roleList.value = list;
+};
+// 获取角色列表
+const getRoleList = async () => {
+  let list = await proxy.$api.getRoleList();
+  deptList.value = list;
+};
+// 用户弹窗关闭
+const handleClose = () => {
+  showModel.value = false;
+  handleReset("dialogForm");
+};
+// 用户提交
+const handleSubmit = () => {
+  // 校验
+  // 在调用的方法里写async
+  proxy.$refs.dialogForm.validate(async (valid) => {
+    if (valid) {
+      // userForm 是响应式对象
+      // toRaw把响应式对象变成普通对象
+      let params = toRaw(userForm);
+      params.userEmail += "@qq.com";
+      let res = await proxy.$api.userSubmit(params);
+      if (res) {
+        showModel.value = false;
+        proxy.$message.success("用户创建成功");
+        // 重置表单
+        handleReset("dialogForm");
+        // 刷新表单
+        getUserList();
+      }
+    }
+  });
 };
 </script>
 
@@ -203,7 +263,7 @@ const handleCreate = () => {
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleQuery">查询</el-button>
-          <el-button @click="handleReset">重置</el-button>
+          <el-button @click="handleReset('form')">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -220,10 +280,11 @@ const handleCreate = () => {
           :prop="item.prop"
           :lable="item.label"
           :formatter="item.formatter"
+          :width="item.width"
         ></el-table-column>
         <el-table-column label="操作" width="150">
           <template #default="scope">
-            <el-button @click="handleClick(scope.row)" size="mini"
+            <el-button @click="handleEdit(scope.row)" size="mini"
               >编辑</el-button
             >
             <!-- 当前对象这一行 -->
@@ -251,10 +312,18 @@ const handleCreate = () => {
         :rules="rules"
       >
         <el-form-item label="用户名" prop="userName">
-          <el-input v-model="userForm.userName" placeholder="请输入用户名称" />
+          <el-input
+            :disabled="action === 'edit'"
+            v-model="userForm.userName"
+            placeholder="请输入用户名称"
+          />
         </el-form-item>
         <el-form-item label="邮箱" prop="mobile">
-          <el-input v-model="userForm.userEmail" placeholder="请输入用户邮箱">
+          <el-input
+            :disabled="action === 'edit'"
+            v-model="userForm.userEmail"
+            placeholder="请输入用户邮箱"
+          >
             <template #append> @qq.com </template>
           </el-input>
         </el-form-item>
@@ -275,8 +344,15 @@ const handleCreate = () => {
           <el-select
             v-model="userForm.roleList"
             placeholder="请选择对应用户系统角色"
+            mutiple
+            style="width: 100%"
           >
-            <el-option></el-option>
+            <el-option
+              v-for="role in roleList"
+              :key="role._id"
+              :label="role.roleName"
+              :value="role._id"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="部门" prop="deptId">
@@ -284,16 +360,17 @@ const handleCreate = () => {
           <el-cascader
             v-model="userForm.deptId"
             placeholder="请选择对应部门"
-            :options="options"
+            :options="deptList"
             :props="{ checkStrictly: true, value: '_id', label: 'deptName' }"
             clearable
+            style="width: 100%"
           />
         </el-form-item>
       </el-form>
       <template #footer>
         <span class="dialog-footer">
-          <el-button>取消</el-button>
-          <el-button type="primary">确定</el-button>
+          <el-button @click="handleClose">取消</el-button>
+          <el-button type="primary" @click="handleSubmit">确定</el-button>
         </span>
       </template>
     </el-dialog>

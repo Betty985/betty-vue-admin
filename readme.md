@@ -261,6 +261,7 @@ app.use(
   直接封装一下
 
   创建 useCurrentInstance.ts 文件：
+  https://www.jianshu.com/p/5558cadd10b9
 
   ```js
   import { ComponentInternalInstance, getCurrentInstance } from 'vue'
@@ -294,6 +295,7 @@ app.use(
 
 - vite 创建的项目导入组件时需要扩展名
 - git commit 功能开发用 feat:
+- eslint 可以进行代码格式化
 
 # 遗留的问题
 
