@@ -12,7 +12,7 @@ const routerArr = [
       title: "首页",
       zyh: false,
     },
-    component: () => import("@/views/home/index.vue"),
+    component: () => import("@/views/home.vue"),
     children: [
       {
         name: "welcome",
@@ -26,10 +26,18 @@ const routerArr = [
       {
         name: "user",
         // 如果要复用上一级的路径不要加"/"，不然会变成绝对路径
-        path: "/user",
+        path: "/system/user",
         component: () => import("@v/user.vue"),
         meta: {
           title: "用户管理",
+        },
+      },
+      {
+        name: "menu",
+        path: "/system/menu",
+        component: () => import("@v/menu.vue"),
+        meta: {
+          title: "菜单管理",
         },
       },
     ],
@@ -37,7 +45,7 @@ const routerArr = [
   {
     path: "/login",
     name: "login",
-    component: () => import("@/views/login/index.vue"),
+    component: () => import("@/views/login.vue"),
     meta: {
       title: "登录页",
     },

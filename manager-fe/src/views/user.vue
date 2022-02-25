@@ -239,9 +239,9 @@ const handleSubmit = () => {
 
 <template>
   <div class="user-manage">
-    <div class="query-form" :model="user">
+    <div class="query-form" >
       <!-- 行内表单 -->
-      <el-form :inline="true" ref="form">
+      <el-form :inline="true" ref="form" :model="user">
         <!-- 不设置prop会导致无法重置，通过prop添加底层是可以获取到的 -->
         <el-form-item label="用户ID" prop="userId">
           <el-input v-model="user.userId" placeholder="请输入用户ID"></el-input>
