@@ -22,9 +22,11 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
+    "md5": "^2.3.0",
     "mongoose": "^6.2.1"
   },
   "devDependencies": {
+    "@types/md5": "^2.3.2",
     "log4js": "^6.4.1",
     "nodemon": "^1.19.1"
   }

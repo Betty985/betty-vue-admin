@@ -56,13 +56,15 @@ function request(options) {
   if (options.method.toLowerCase() === "get") {
     options.params = options.data;
   }
+  // 通过isMock这一中间量确保config.mock不被污染
+  let isMock = config.mock;
   if (typeof options.mock !== "undefined") {
-    config.mock = options.mock;
+    isMock = options.mock;
   }
   if (config.env === "prod") {
     service.defaults.baseURL = config.baseApi;
   } else {
-    service.defaults.baseURL = config.mock ? config.mockApi : config.baseApi;
+    service.defaults.baseURL = isMock ? config.mockApi : config.baseApi;
   }
   return service(options);
 }

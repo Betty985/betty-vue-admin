@@ -9,7 +9,7 @@ const { proxy } = getCurrentInstance();
 // reactive一般创建引用类型，ref一般创建基本类型
 // 初始化用户表单对象
 const user = reactive({
-  state: 0,
+  state: 1,
 });
 // ref定义的对象通过.value进行赋值
 // 初始化用户列表
@@ -64,7 +64,7 @@ const rules = reactive({
   ],
   mobile: [
     {
-      pattern: /1{3-9}\d{9}/,
+      pattern: /1[3-9]\d{9}/,
       message: "请输入正确的手机号格式",
       trigger: "blur",
     },
