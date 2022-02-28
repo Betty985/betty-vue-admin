@@ -11,6 +11,7 @@ const jwt = require("jsonwebtoken");
 const koajwt = require("koa-jwt");
 //表
 const users = require("./routes/users");
+const menus = require("./routes/menus");
 const util = require("./utils/util");
 
 // 加载koa-router并调用方法
@@ -42,6 +43,7 @@ app.use(
 //   ctx.body = "error 111s";
 // });
 // logger
+
 app.use(async (ctx, next) => {
   // 把参数记录到日志里
   log4js.info(`pramas: get ${JSON.stringify(ctx.request.query)}`);
@@ -78,6 +80,8 @@ router.get("/leave/count", (ctx) => {
   return 3;
 });
 router.use(users.routes(), users.allowedMethods()); //二级路由 加载用户模块路由和用户模块的方法
+router.use(menus.routes(), menus.allowedMethods());
+
 app.use(router.routes(), router.allowedMethods()); //加载全部的路由
 // error-handling
 app.on("error", (err, ctx) => {

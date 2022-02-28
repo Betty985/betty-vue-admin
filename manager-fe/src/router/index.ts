@@ -12,7 +12,7 @@ const routerArr = [
       title: "首页",
       zyh: false,
     },
-    component: () => import("@/views/home.vue"),
+    component: () => import("@/views/Home.vue"),
     children: [
       {
         name: "welcome",
@@ -38,6 +38,14 @@ const routerArr = [
         component: () => import("@v/menu.vue"),
         meta: {
           title: "菜单管理",
+        },
+      },
+      {
+        name: "role",
+        path: "/system/role",
+        component: () => import("@v/Role.vue"),
+        meta: {
+          title: "角色管理",
         },
       },
     ],

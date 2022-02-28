@@ -136,7 +136,7 @@ const columns = reactive([
 onMounted(() => {
   getUserList();
   getDeptList();
-  getRoleList();
+  getRoleAllList();
 });
 // 分页事件处理
 let handleCurrentChange = (current) => {
@@ -204,8 +204,8 @@ const getDeptList = async () => {
   roleList.value = list;
 };
 // 获取角色列表
-const getRoleList = async () => {
-  let list = await proxy.$api.getRoleList();
+const getRoleAllList = async () => {
+  let list = await proxy.$api.getRoleAllList();
   deptList.value = list;
 };
 // 用户弹窗关闭

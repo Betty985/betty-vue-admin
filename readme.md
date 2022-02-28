@@ -306,6 +306,8 @@ app.use(
 - ~~从 3-5 开始跳过第三章~~
 
 - ~~输入框图标~~
+- 菜单样式及数据无法渲染
+- 页面无法显示内容（element 组件问题？
 
   ```js
   //全局注册组件
@@ -314,6 +316,8 @@ app.use(
 - login 的 request 报错，axios 封装问题
 
 - menumock 没有实现
+
+# 补充
 
 - this.$routes 的 vue3 写法
 
