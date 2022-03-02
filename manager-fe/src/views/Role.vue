@@ -115,7 +115,9 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="showPermission = false">取消</el-button>
-          <el-button type="primary" @click="handleSubmit">确定</el-button>
+          <el-button type="primary" @click="handlePermissionSubmit"
+            >确定</el-button
+          >
         </span>
       </template>
     </el-dialog>
@@ -126,6 +128,7 @@ import { reactive } from "@vue/reactivity";
 import { getCurrentInstance, onMounted } from "@vue/runtime-core";
 import utils from "@u/utils.js";
 import { ref } from "vue";
+import { isTemplateNode } from "@vue/compiler-core";
 // 分页插件
 const pager = reactive({
   pageNum: 1,
@@ -134,6 +137,8 @@ const pager = reactive({
 });
 let roleList = reactive([]);
 let menuList = reactive([]);
+// 菜单映射表
+let actionMap = reactive({});
 let action = ref("");
 //
 let curRoleName = ref("");
@@ -148,33 +153,24 @@ let columns = reactive([
   {
     label: "角色名称",
     prop: "roleName",
-    width: 150,
   },
   {
     label: "备注",
     prop: "remark",
   },
   {
-    //   标识菜单是路由还是按钮
-    label: "菜单类型",
-    prop: "menuType",
-  },
-  {
-    label: "权限标识",
-    prop: "menuCode",
-  },
-  {
-    label: "路由地址",
-    prop: "path",
-  },
-  {
-    label: "组件路径",
-    prop: "component",
-  },
-  {
-    label: "菜单状态",
-    prop: "menuState",
-    width: 90,
+    label: "权限列表",
+    prop: "permissList",
+    formatter(row, column, value) {
+      let list = value.halfcheckedKeys || [];
+      let names = [];
+      list.map((key) => {
+        if (key) {
+          names.push(actionMap[key]);
+        }
+      });
+      return names.join(",");
+    },
   },
   {
     label: "创建时间",
@@ -200,6 +196,7 @@ async function getMenuList() {
   try {
     let list = await proxy.$api.getMenuList();
     menuList = list;
+    getActionMap(list);
   } catch (e) {
     throw new Error(e);
   }
@@ -272,12 +269,62 @@ function handleClose() {
   handleReset("dialogForm");
 }
 // 权限弹窗
+// 通过句柄ref访问组件，通过组件访问它的方法
 function handlePermission(row) {
   showPermission.value = true;
   curRoleId.value = row._id;
   curRoleName.value = row.roleName;
   let { checkedKeys } = row.permissionList;
+  // key就是节点ID
+  setTimeout(() => {
+    // 加入宏任务，防止句柄还没有生成就调用句柄上的方法
+    proxy.$refs.permissionTree.setCheckedKeys(checkedKeys);
+  });
 }
-// 通过句柄ref访问组件，通过组件访问它的方法
+
+async function handlePermissionSubmit() {
+  // 获取选中的节点
+  let nodes = proxy.$refs.permissionTree.getCheckedNodes();
+  let halfKeys = proxy.$refs.permissionTree.getHalfcheckedKeys();
+  let checkedKeys = [];
+  let parentKeys = [];
+  nodes.map((node) => {
+    if (!node.children) {
+      checkedKeys.push(node._id);
+    } else {
+      parentKeys.push(node._id);
+    }
+  });
+  let params = {
+    _id: proxy.curRoleId,
+    permissionList: {
+      checkedKeys,
+      halfcheckedKeys: parentKeys.concat(halfKeys),
+    },
+  };
+  await proxy.$api.updatePermission();
+  showPermission.value = false;
+  proxy.$message.success("设置成功");
+  proxy.getMenuList();
+}
+// 递归获取菜单id和名称的映射
+function getActionMap(list) {
+  let map = {};
+  const deep = (arr) => {
+    for (item of arr) {
+      //  菜单下面有按钮  有action说明是最后一级
+      if (item.children && item.action) {
+        actionMap[item._id] = item.menuName;
+      }
+      // 不是一级菜单，递归子菜单
+      if (item.children && !item.action) {
+        deep(item.children);
+      }
+    }
+  };
+  // 深拷贝：防止数据污染
+  deep(JSON.parse(JSON.stringify(list)));
+  actionMap = map;
+}
 </script>
 <style scoped></style>
