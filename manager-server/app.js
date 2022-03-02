@@ -12,6 +12,7 @@ const koajwt = require("koa-jwt");
 //表
 const users = require("./routes/users");
 const menus = require("./routes/menus");
+const roles = require("./routes/roles");
 const util = require("./utils/util");
 
 // 加载koa-router并调用方法
@@ -79,8 +80,9 @@ router.get("/leave/count", (ctx) => {
   ctx.body = playload;
   return 3;
 });
-router.use(users.routes(), users.allowedMethods()); //二级路由 加载用户模块路由和用户模块的方法
+router.use(users.routes(), users.allowedMethods()); //1级路由 加载用户模块路由和用户模块的方法
 router.use(menus.routes(), menus.allowedMethods());
+router.use(roles.routes(), roles.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods()); //加载全部的路由
 // error-handling

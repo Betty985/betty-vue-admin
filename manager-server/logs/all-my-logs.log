@@ -142,3 +142,14 @@
 [2022-02-26T19:50:02.750] [INFO] info - pramas: post {"userName":"admin","userPwd":"adminn"}
 [2022-02-26T19:51:15.100] [INFO] info - pramas: get {}
 [2022-02-26T19:51:15.100] [INFO] info - pramas: post {"userName":"admin","userPwd":"adminn"}
+[2022-03-02T21:24:42.966] [INFO] info - ****数据库连接成功 *****
+[2022-03-02T21:24:48.819] [INFO] info - pramas: get {}
+[2022-03-02T21:24:48.820] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-02T21:24:51.533] [INFO] info - pramas: get {}
+[2022-03-02T21:24:51.534] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-02T21:25:03.047] [INFO] info - pramas: get {}
+[2022-03-02T21:25:03.049] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-02T21:28:35.268] [INFO] info - ****数据库连接成功 *****
+[2022-03-02T21:32:05.306] [INFO] info - ****数据库连接成功 *****
+[2022-03-02T21:33:12.219] [INFO] info - ****数据库连接成功 *****
+[2022-03-02T21:36:23.582] [INFO] info - ****数据库连接成功 *****

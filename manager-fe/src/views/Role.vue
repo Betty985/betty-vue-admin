@@ -62,6 +62,7 @@
         layout="prev, pager, next"
         :total="pager.total"
         :page-size="pager.pageSize"
+        @current-change="handleCurrentChange"
       >
       </el-pagination>
     </div>
@@ -161,15 +162,25 @@ let columns = reactive([
   {
     label: "权限列表",
     prop: "permissList",
+    width: 200,
     formatter(row, column, value) {
       let list = value.halfcheckedKeys || [];
       let names = [];
       list.map((key) => {
-        if (key) {
-          names.push(actionMap[key]);
+        let name = actionMap[key];
+        // 过滤掉空值
+        if (key && name) {
+          names.push(name);
         }
       });
       return names.join(",");
+    },
+  },
+  {
+    label: "更新时间",
+    prop: "updateTime",
+    formatter(row, column, value) {
+      return utils.formateDate(new Date(value));
     },
   },
   {
@@ -203,7 +214,10 @@ async function getMenuList() {
 }
 async function getRoleList() {
   try {
-    let { list, page } = await proxy.$api.getRoleList(queryForm);
+    let { list, page } = await proxy.$api.getRoleList({
+      ...queryForm,
+      ...pager,
+    });
     roleList = list;
     pager.total = page.total;
   } catch (e) {
@@ -236,7 +250,7 @@ function handleEdit(row: any) {
   // nextTick在下次 DOM 更新循环结束之后执行延迟回调。
   // 在修改数据之后立即使用这个方法，获取更新后的 DOM。
   proxy.$nextTick(() => {
-    roleForm = row;
+    roleForm = { _id: row._id, roleName: row.roleName, remark: row.remark };
     // Object.assign(roleForm, row);
   });
 }
@@ -302,7 +316,7 @@ async function handlePermissionSubmit() {
       halfcheckedKeys: parentKeys.concat(halfKeys),
     },
   };
-  await proxy.$api.updatePermission();
+  await proxy.$api.updatePermission(params);
   showPermission.value = false;
   proxy.$message.success("设置成功");
   proxy.getMenuList();
@@ -311,7 +325,7 @@ async function handlePermissionSubmit() {
 function getActionMap(list) {
   let map = {};
   const deep = (arr) => {
-    for (item of arr) {
+    for (let item of arr) {
       //  菜单下面有按钮  有action说明是最后一级
       if (item.children && item.action) {
         actionMap[item._id] = item.menuName;
@@ -325,6 +339,11 @@ function getActionMap(list) {
   // 深拷贝：防止数据污染
   deep(JSON.parse(JSON.stringify(list)));
   actionMap = map;
+}
+// 分页    当前分页页码current
+function handleCurrentChange(current) {
+  pager.pageNum = current;
+  getRoleList();
 }
 </script>
 <style scoped></style>

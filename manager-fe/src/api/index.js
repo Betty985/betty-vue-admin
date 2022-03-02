@@ -49,11 +49,11 @@ export default {
       mock: true,
     });
   },
-  getRoleList() {
+  getRoleList(params) {
     return request({
       url: "/roles/list",
       method: "get",
-      data: {},
+      data: params,
       mock: true,
     });
   },

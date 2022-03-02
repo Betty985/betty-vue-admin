@@ -8,6 +8,10 @@ const roleSchema = new mongoose.Schema({
     checkedKeys: [],
     halfcheckedKeys: [],
   },
+  updateTime: {
+    type: Date,
+    default: Date.now(),
+  },
   createTime: {
     type: Date,
     default: Date.now(),

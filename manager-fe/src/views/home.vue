@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BreadCrumb from "./BreadCroumb.vue";
+import BreadCrumb from "@c/BreadCroumb.vue";
 import { onMounted, reactive } from "vue";
 import { getCurrentInstance } from "vue";
 import { router } from "../router";
