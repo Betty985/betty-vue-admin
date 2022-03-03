@@ -13,6 +13,7 @@ const koajwt = require("koa-jwt");
 const users = require("./routes/users");
 const menus = require("./routes/menus");
 const roles = require("./routes/roles");
+const depts = require("./routes/depts");
 const util = require("./utils/util");
 
 // 加载koa-router并调用方法
@@ -54,7 +55,7 @@ app.use(async (ctx, next) => {
     // 401	Unauthorized	请求要求用户的身份认证
     if (err.status == "401") {
       // 可以修改状态码
-      ctx.status = 200;
+      ctx.swtatus = 200;
       ctx.body = util.fail("Token认证失败", util.CODE.AUTH_ERROR);
     } else {
       // 如果不是401，抛出别的异常
@@ -64,17 +65,23 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start;
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
+
 app.use(
   koajwt({
     secret: "miyao",
+    getToken: function (ctx, opts) {
+      const { authorization } = ctx.header;
+      if (authorization && authorization.split(" ")[0] === "snow") {
+        return authorization.split(" ")[1];
+      }
+    },
   }).unless({
-    // 正则以/api开头的
-    path: [/^\/api\/users\/login/],
+    path: [/\/users\/login/],
   })
 );
 // routes
 router.prefix("/api"); //一级路由
-router.get("/leave/count", (ctx) => {
+router.get("/users/login", (ctx) => {
   const token = ctx.request.header.authorization.split(" ")[1];
   const playload = jwt.verify(token, "miyao");
   ctx.body = playload;
@@ -83,6 +90,7 @@ router.get("/leave/count", (ctx) => {
 router.use(users.routes(), users.allowedMethods()); //1级路由 加载用户模块路由和用户模块的方法
 router.use(menus.routes(), menus.allowedMethods());
 router.use(roles.routes(), roles.allowedMethods());
+router.use(depts.routes(), depts.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods()); //加载全部的路由
 // error-handling

@@ -37,20 +37,20 @@ router.post("/login", async (ctx, next) => {
         userName,
         userPwd,
       },
-      "userName"
-    );
-    const data = res._doc; //返回用户信息
-    const token = jwt.sign(
-      {
-        data,
-      },
-      "miyao",
-      { expiresIn: "1h" }
+      "userName userEmail"
     );
     // res返回的是一个数组
     if (res) {
       // 或者解构赋值
-
+      const data = res._doc; //返回用户信息
+      // 生成签名
+      const token = jwt.sign(
+        {
+          data,
+        },
+        "miyao",
+        { expiresIn: "10h" }
+      );
       data.token = token;
       ctx.body = util.success(data);
     } else {
@@ -177,5 +177,19 @@ router.post("/operate", async (ctx) => {
       ctx.body = util.fail(error.stack, "更新失败");
     }
   }
+});
+// 全部用户列表
+router.get("/all/list", async (ctx) => {
+  try {
+    const list = await user.find({}, "userId userName userEmail");
+    ctx.body = util.success(list);
+  } catch (error) {
+    ctx.body = util.fail(error.stack);
+  }
+});
+// 动态获取用户权限菜单
+router.get("/getPermissionList", async (ctx) => {
+  // 不区分大小写
+  let authorization = ctx.request.headers.authorization;
 });
 module.exports = router;

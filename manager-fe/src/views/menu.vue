@@ -19,7 +19,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="getMenuList">查询</el-button>
-          <el-button @click="handleReset('form')">重置</el-button>
+          <el-button @click="handleReset(queryForm)">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -234,7 +234,7 @@ async function getMenuList() {
     let list = await proxy.$api.getMenuList(queryForm);
     menuList = list;
   } catch (e) {
-    throw new Error(e);
+    console.error(e);
   }
 }
 onMounted(() => {
@@ -242,7 +242,7 @@ onMounted(() => {
 });
 // 表单重置
 function handleReset(form) {
-  proxy.$refs[form].resetFields();
+  proxy.$refs.form.resetFields();
 }
 // 新增菜单
 function handleAdd(type, row) {

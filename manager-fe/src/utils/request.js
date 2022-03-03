@@ -6,7 +6,8 @@
 import axios from "axios";
 import config from "./../config";
 import { ElMessage } from "element-plus";
-import { useRouter } from "vue-router";
+// 从router文件里导入
+import { router } from "./../router";
 import storage from "./storage";
 const TOKEN_INVALED = "token 认证失败,请重新登录";
 const NETWORK_ERROR = "网络请求异常,请稍后重试";
@@ -22,7 +23,6 @@ const service = axios.create({
 // 前端输入完账号密码-》后端账号密码【】-》后端return token
 // 前端存储token [localStroage.get('token')]
 service.interceptors.request.use((req) => {
-  // to-do
   const headers = req.headers;
   const { token } = storage.getItem("userInfo");
   if (!headers.Authorization) headers.Authorization = "snow " + token;
@@ -37,9 +37,8 @@ service.interceptors.response.use((res) => {
   } else if (code === 50001) {
     ElMessage.error(TOKEN_INVALED);
     setTimeout(() => {
-      let router = useRouter();
       router.push("/login");
-    }, 1500);
+    }, 50000);
     return Promise.reject(TOKEN_INVALED);
   } else {
     ElMessage.error(msg || NETWORK_ERROR);

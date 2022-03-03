@@ -7,7 +7,6 @@ import { reactive, ref } from "vue";
 import { log } from "console";
 // import { Search } from "@element-plus/icons-vue";
 let router = useRouter();
-let msg = "雪球";
 // 解构
 let { proxy } = getCurrentInstance();
 // proxy
@@ -25,10 +24,7 @@ let { proxy } = getCurrentInstance();
 //     console.log("出错了~~~");
 //   });
 // 不变成响应式数据会出bug，比如输入有问题和失焦后报错
-let user = reactive({
-  userName: "",
-  userPwd: "",
-});
+let user = reactive({});
 let rules = reactive({
   userName: [
     {

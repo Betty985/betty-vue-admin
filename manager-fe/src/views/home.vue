@@ -20,7 +20,7 @@ function toggle() {
 function handleLogout(key: string) {
   if (key === "email") return;
   proxy.$store.commit("saveUserInfo", "");
-  data.userInfo = null;
+  data.userInfo = {};
   router.push("/login");
 }
 async function getNocticeCount() {

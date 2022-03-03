@@ -1,4 +1,4 @@
-import { Router, createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 const routerArr = [
   {
     path: "/",
@@ -48,6 +48,14 @@ const routerArr = [
           title: "角色管理",
         },
       },
+      {
+        name: "dept",
+        path: "/system/dept",
+        component: () => import("@v/Dept.vue"),
+        meta: {
+          title: "部门管理",
+        },
+      },
     ],
   },
   {
@@ -71,7 +79,7 @@ const routerArr = [
   },
 ] as any;
 
-export const router: Router = createRouter({
+const router = createRouter({
   history: createWebHashHistory(),
   routes: routerArr,
   strict: true,
@@ -89,3 +97,5 @@ export const router: Router = createRouter({
     });
   },
 });
+
+export { router };

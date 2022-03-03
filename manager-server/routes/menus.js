@@ -5,6 +5,7 @@ const util = require("../utils/util");
 router.prefix("/menu");
 // 菜单列表查询
 router.get("/list", async (ctx) => {
+  console.log(1);
   const { menuName, menuState } = ctx.request.query;
   const params = {};
   if (menuName) params.menuName = menuName;
@@ -17,7 +18,7 @@ router.get("/list", async (ctx) => {
 });
 // 递归拼接树形列表
 function getTreeMenu(rootList, id, list) {
-  for (i < 0; i < rootList.length; i++) {
+  for (let i = 0; i < rootList.length; i++) {
     let item = rootList[i];
     // 判断是不是一级菜单   pop会改变数组
     // id是buffer类型，需要都转成字符串

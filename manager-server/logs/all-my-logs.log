@@ -1,155 +1,212 @@
-[2022-02-25T14:31:29.470] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T14:32:20.355] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T14:35:38.413] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T14:58:29.433] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T14:58:33.018] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T14:59:38.832] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T14:59:46.192] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:00:20.711] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:00:45.553] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:01:01.793] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:01:26.879] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:01:51.727] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:02:02.010] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:33:36.496] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:36:26.169] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:36:46.316] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:37:09.954] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:37:58.656] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:39:03.860] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:39:23.937] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:39:31.343] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:39:33.354] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:40:15.697] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:43:25.630] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:43:32.064] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:44:14.738] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:45:06.531] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:45:54.843] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:47:39.696] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:51:14.108] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:52:26.236] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:53:24.953] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:56:51.610] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:57:27.948] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:57:43.691] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T15:59:18.955] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:01:16.964] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:01:18.648] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:01:42.181] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:01:56.567] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:02:13.895] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:02:58.058] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:03:48.422] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:03:59.849] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:04:49.573] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:04:55.740] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:06:27.394] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:13:29.513] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:15:12.305] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:15:39.143] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:15:54.869] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:16:04.090] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:21:15.167] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:21:38.980] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:22:07.473] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:22:20.706] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:22:46.164] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:23:52.840] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:25:04.338] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:25:38.410] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:26:47.937] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:34:39.920] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:34:50.579] [INFO] info - pramas: get {}
-[2022-02-25T16:34:50.580] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-25T16:34:55.335] [INFO] info - pramas: get {}
-[2022-02-25T16:34:55.336] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-25T16:35:01.423] [INFO] info - pramas: get {}
-[2022-02-25T16:35:01.424] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-25T16:36:48.436] [INFO] info - pramas: get {}
-[2022-02-25T16:36:48.437] [INFO] info - pramas: post {"userName":"sadasd","userPwd":"asdasd"}
-[2022-02-25T16:38:28.765] [INFO] info - pramas: get {}
-[2022-02-25T16:38:28.766] [INFO] info - pramas: post {"userName":"a","userPwd":"a"}
-[2022-02-25T16:38:47.928] [INFO] info - pramas: get {}
-[2022-02-25T16:38:47.929] [INFO] info - pramas: post {"userName":"a","userPwd":"a"}
-[2022-02-25T16:39:32.829] [INFO] info - pramas: get {}
-[2022-02-25T16:39:32.830] [INFO] info - pramas: post {"userName":"a","userPwd":"a"}
-[2022-02-25T16:39:52.654] [INFO] info - pramas: get {}
-[2022-02-25T16:39:52.656] [INFO] info - pramas: post {"userName":"a","userPwd":"a"}
-[2022-02-25T16:40:27.638] [INFO] info - pramas: get {}
-[2022-02-25T16:40:27.640] [INFO] info - pramas: post {"userName":"a","userPwd":"a"}
-[2022-02-25T16:40:31.678] [INFO] info - pramas: get {}
-[2022-02-25T16:40:31.679] [INFO] info - pramas: post {"userName":"a","userPwd":"a"}
-[2022-02-25T16:40:49.340] [INFO] info - pramas: get {}
-[2022-02-25T16:40:49.341] [INFO] info - pramas: post {"userName":"a","userPwd":"a"}
-[2022-02-25T16:51:08.242] [INFO] info - pramas: get {}
-[2022-02-25T16:51:08.242] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-25T16:52:03.712] [INFO] info - pramas: get {"state":"0","pageNum":"1","pageSize":"10"}
-[2022-02-25T16:52:03.713] [INFO] info - pramas: post {}
-[2022-02-25T16:52:18.449] [INFO] info - pramas: get {"state":"1","pageNum":"1","pageSize":"10"}
-[2022-02-25T16:52:18.450] [INFO] info - pramas: post {}
-[2022-02-25T16:52:18.724] [INFO] info - pramas: get {"state":"1","pageNum":"1","pageSize":"10"}
-[2022-02-25T16:52:18.725] [INFO] info - pramas: post {}
-[2022-02-25T16:52:25.584] [INFO] info - pramas: get {"state":"0","pageNum":"1","pageSize":"10"}
-[2022-02-25T16:52:25.585] [INFO] info - pramas: post {}
-[2022-02-25T16:58:58.242] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:59:03.870] [INFO] info - ****数据库连接成功 *****
-[2022-02-25T16:59:39.500] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:37:42.042] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:37:48.396] [INFO] info - pramas: get {}
-[2022-02-26T19:37:48.397] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:37:57.688] [INFO] info - pramas: get {}
-[2022-02-26T19:37:57.691] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:40:12.601] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:40:13.257] [INFO] info - pramas: get {}
-[2022-02-26T19:40:13.257] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:40:14.588] [INFO] info - pramas: get {}
-[2022-02-26T19:40:14.589] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:40:31.211] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:41:04.530] [INFO] info - pramas: get {}
-[2022-02-26T19:41:04.531] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:41:11.712] [INFO] info - pramas: get {}
-[2022-02-26T19:41:11.713] [INFO] info - pramas: post {"userName":"admin","userPwd":"123456"}
-[2022-02-26T19:42:40.146] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:42:50.635] [INFO] info - pramas: get {}
-[2022-02-26T19:42:50.636] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:43:42.888] [INFO] info - pramas: get {}
-[2022-02-26T19:43:42.889] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:44:12.577] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:44:18.477] [INFO] info - pramas: get {}
-[2022-02-26T19:44:18.479] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:44:33.413] [INFO] info - pramas: get {}
-[2022-02-26T19:44:33.414] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:44:33.609] [INFO] info - pramas: get {}
-[2022-02-26T19:44:33.610] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:44:33.781] [INFO] info - pramas: get {}
-[2022-02-26T19:44:33.782] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:44:46.762] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:44:55.187] [INFO] info - pramas: get {}
-[2022-02-26T19:44:55.188] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:45:11.731] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:47:50.506] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:47:56.608] [INFO] info - pramas: get {}
-[2022-02-26T19:47:56.609] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-02-26T19:48:20.648] [INFO] info - pramas: get {}
-[2022-02-26T19:48:20.649] [INFO] info - pramas: post {"userName":"admin","userPwd":"adminn"}
-[2022-02-26T19:48:39.307] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:48:42.833] [INFO] info - pramas: get {}
-[2022-02-26T19:48:42.833] [INFO] info - pramas: post {"userName":"admin","userPwd":"adminn"}
-[2022-02-26T19:49:31.976] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:50:02.198] [INFO] info - ****数据库连接成功 *****
-[2022-02-26T19:50:02.749] [INFO] info - pramas: get {}
-[2022-02-26T19:50:02.750] [INFO] info - pramas: post {"userName":"admin","userPwd":"adminn"}
-[2022-02-26T19:51:15.100] [INFO] info - pramas: get {}
-[2022-02-26T19:51:15.100] [INFO] info - pramas: post {"userName":"admin","userPwd":"adminn"}
-[2022-03-02T21:24:42.966] [INFO] info - ****数据库连接成功 *****
-[2022-03-02T21:24:48.819] [INFO] info - pramas: get {}
-[2022-03-02T21:24:48.820] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-03-02T21:24:51.533] [INFO] info - pramas: get {}
-[2022-03-02T21:24:51.534] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-03-02T21:25:03.047] [INFO] info - pramas: get {}
-[2022-03-02T21:25:03.049] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
-[2022-03-02T21:28:35.268] [INFO] info - ****数据库连接成功 *****
-[2022-03-02T21:32:05.306] [INFO] info - ****数据库连接成功 *****
-[2022-03-02T21:33:12.219] [INFO] info - ****数据库连接成功 *****
-[2022-03-02T21:36:23.582] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T17:36:14.870] [INFO] info - pramas: get {}
+[2022-03-03T17:36:14.922] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:36:16.760] [INFO] info - pramas: get {}
+[2022-03-03T17:36:16.761] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:36:52.090] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T17:37:02.663] [INFO] info - pramas: get {}
+[2022-03-03T17:37:02.663] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:37:08.319] [INFO] info - pramas: get {}
+[2022-03-03T17:37:08.320] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:37:56.688] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T17:38:09.166] [INFO] info - pramas: get {}
+[2022-03-03T17:38:09.167] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:38:23.605] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T17:38:23.606] [INFO] info - pramas: post {}
+[2022-03-03T17:39:00.259] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T17:43:38.409] [INFO] info - pramas: get {}
+[2022-03-03T17:43:38.410] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:43:44.231] [INFO] info - pramas: get {"roleName":"1","pageNum":"1","pageSize":"10"}
+[2022-03-03T17:43:44.232] [INFO] info - pramas: post {}
+[2022-03-03T17:43:44.538] [INFO] info - pramas: get {}
+[2022-03-03T17:43:44.538] [INFO] info - pramas: post {}
+[2022-03-03T17:44:27.707] [INFO] info - pramas: get {}
+[2022-03-03T17:44:27.708] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:44:40.835] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T17:44:40.836] [INFO] info - pramas: post {}
+[2022-03-03T17:45:35.466] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T17:45:40.818] [INFO] info - pramas: get {}
+[2022-03-03T17:45:40.818] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:45:45.167] [INFO] info - pramas: get {"roleName":"1","pageNum":"1","pageSize":"10"}
+[2022-03-03T17:45:45.168] [INFO] info - pramas: post {}
+[2022-03-03T17:45:45.473] [INFO] info - pramas: get {}
+[2022-03-03T17:45:45.473] [INFO] info - pramas: post {}
+[2022-03-03T17:45:50.718] [INFO] info - pramas: get {}
+[2022-03-03T17:45:50.719] [INFO] info - pramas: post {"row":{"isTrusted":true},"action":{"__v_isShallow":false,"__v_isRef":true,"_rawValue":"create","_value":"create"}}
+[2022-03-03T17:45:53.532] [INFO] info - pramas: get {}
+[2022-03-03T17:45:53.533] [INFO] info - pramas: post {}
+[2022-03-03T17:45:54.818] [INFO] info - pramas: get {}
+[2022-03-03T17:45:54.819] [INFO] info - pramas: post {}
+[2022-03-03T17:45:55.149] [INFO] info - pramas: get {}
+[2022-03-03T17:45:55.150] [INFO] info - pramas: post {}
+[2022-03-03T17:46:16.094] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T17:46:25.550] [INFO] info - pramas: get {"roleName":"1","pageNum":"1","pageSize":"10"}
+[2022-03-03T17:46:25.555] [INFO] info - pramas: post {}
+[2022-03-03T17:46:25.592] [INFO] info - pramas: get {}
+[2022-03-03T17:46:25.593] [INFO] info - pramas: post {}
+[2022-03-03T17:46:31.727] [INFO] info - pramas: get {"roleName":"1","pageNum":"1","pageSize":"10"}
+[2022-03-03T17:46:31.732] [INFO] info - pramas: post {}
+[2022-03-03T17:46:31.752] [INFO] info - pramas: get {}
+[2022-03-03T17:46:31.754] [INFO] info - pramas: post {}
+[2022-03-03T17:46:36.713] [INFO] info - pramas: get {"roleName":"1","pageNum":"1","pageSize":"10"}
+[2022-03-03T17:46:36.715] [INFO] info - pramas: post {}
+[2022-03-03T17:46:36.719] [INFO] info - pramas: get {}
+[2022-03-03T17:46:36.720] [INFO] info - pramas: post {}
+[2022-03-03T17:48:23.200] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T17:49:31.165] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T17:49:35.325] [INFO] info - pramas: get {}
+[2022-03-03T17:49:35.326] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:54:46.244] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T17:54:46.245] [INFO] info - pramas: post {}
+[2022-03-03T17:56:06.293] [INFO] info - pramas: get {}
+[2022-03-03T17:56:06.294] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:56:12.962] [INFO] info - pramas: get {"roleName":"1","pageNum":"1","pageSize":"10"}
+[2022-03-03T17:56:12.963] [INFO] info - pramas: post {}
+[2022-03-03T17:56:12.974] [INFO] info - pramas: get {}
+[2022-03-03T17:56:12.975] [INFO] info - pramas: post {}
+[2022-03-03T17:56:15.157] [INFO] info - pramas: get {}
+[2022-03-03T17:56:15.159] [INFO] info - pramas: post {"row":{"isTrusted":true},"action":{"__v_isShallow":false,"__v_isRef":true,"_rawValue":"create","_value":"create"}}
+[2022-03-03T17:56:15.419] [INFO] info - pramas: get {"roleName":"1","pageNum":"1","pageSize":"10"}
+[2022-03-03T17:56:15.420] [INFO] info - pramas: post {}
+[2022-03-03T17:56:18.117] [INFO] info - pramas: get {}
+[2022-03-03T17:56:18.117] [INFO] info - pramas: post {}
+[2022-03-03T17:56:19.566] [INFO] info - pramas: get {}
+[2022-03-03T17:56:19.567] [INFO] info - pramas: post {}
+[2022-03-03T17:56:19.752] [INFO] info - pramas: get {}
+[2022-03-03T17:56:19.755] [INFO] info - pramas: post {}
+[2022-03-03T17:56:19.832] [INFO] info - pramas: get {}
+[2022-03-03T17:56:19.833] [INFO] info - pramas: post {}
+[2022-03-03T17:56:19.920] [INFO] info - pramas: get {}
+[2022-03-03T17:56:19.921] [INFO] info - pramas: post {}
+[2022-03-03T17:56:20.091] [INFO] info - pramas: get {}
+[2022-03-03T17:56:20.091] [INFO] info - pramas: post {}
+[2022-03-03T17:56:20.257] [INFO] info - pramas: get {}
+[2022-03-03T17:56:20.260] [INFO] info - pramas: post {}
+[2022-03-03T17:56:20.417] [INFO] info - pramas: get {}
+[2022-03-03T17:56:20.418] [INFO] info - pramas: post {}
+[2022-03-03T17:56:39.832] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T17:56:39.833] [INFO] info - pramas: post {}
+[2022-03-03T17:56:45.845] [INFO] info - pramas: get {}
+[2022-03-03T17:56:45.847] [INFO] info - pramas: post {}
+[2022-03-03T17:57:28.755] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T17:57:28.757] [INFO] info - pramas: post {}
+[2022-03-03T17:59:08.666] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T17:59:08.666] [INFO] info - pramas: post {}
+[2022-03-03T17:59:21.653] [INFO] info - pramas: get {}
+[2022-03-03T17:59:21.653] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:59:27.641] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T17:59:27.643] [INFO] info - pramas: post {}
+[2022-03-03T17:59:51.449] [INFO] info - pramas: get {}
+[2022-03-03T17:59:51.449] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T17:59:56.419] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T17:59:56.420] [INFO] info - pramas: post {}
+[2022-03-03T18:00:00.507] [INFO] info - pramas: get {}
+[2022-03-03T18:00:00.508] [INFO] info - pramas: post {}
+[2022-03-03T18:00:02.233] [INFO] info - pramas: get {}
+[2022-03-03T18:00:02.234] [INFO] info - pramas: post {}
+[2022-03-03T18:00:02.497] [INFO] info - pramas: get {}
+[2022-03-03T18:00:02.498] [INFO] info - pramas: post {}
+[2022-03-03T18:00:02.841] [INFO] info - pramas: get {}
+[2022-03-03T18:00:02.842] [INFO] info - pramas: post {}
+[2022-03-03T18:02:27.625] [INFO] info - pramas: get {}
+[2022-03-03T18:02:27.626] [INFO] info - pramas: post {"userName":"admin","userPwd":"asdasdasdas"}
+[2022-03-03T18:02:33.956] [INFO] info - pramas: get {}
+[2022-03-03T18:02:33.958] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T18:04:01.722] [INFO] info - pramas: get {}
+[2022-03-03T18:04:01.723] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T18:04:35.592] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:04:35.593] [INFO] info - pramas: post {}
+[2022-03-03T18:04:50.164] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:04:50.165] [INFO] info - pramas: post {}
+[2022-03-03T18:08:00.863] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:08:30.490] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:08:30.492] [INFO] info - pramas: post {}
+[2022-03-03T18:08:56.613] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:11:31.645] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:11:58.573] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:11:58.574] [INFO] info - pramas: post {}
+[2022-03-03T18:12:38.337] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:14:16.355] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:17:29.495] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:17:40.336] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:17:44.378] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:17:44.379] [INFO] info - pramas: post {}
+[2022-03-03T18:19:42.172] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:19:47.845] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:19:47.846] [INFO] info - pramas: post {}
+[2022-03-03T18:20:01.303] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:21:57.591] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:21:58.315] [INFO] info - pramas: get {}
+[2022-03-03T18:21:58.316] [INFO] info - pramas: post {"userName":"asdasd","userPwd":"asdsaas"}
+[2022-03-03T18:22:02.511] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:22:02.513] [INFO] info - pramas: post {}
+[2022-03-03T18:22:29.565] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:40:51.231] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:40:58.261] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:41:05.910] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:41:11.718] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:41:11.718] [INFO] info - pramas: post {}
+[2022-03-03T18:41:39.499] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:42:13.471] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:42:19.762] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:42:19.763] [INFO] info - pramas: post {}
+[2022-03-03T18:43:11.599] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:52:44.590] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:52:53.338] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:52:53.339] [INFO] info - pramas: post {}
+[2022-03-03T18:53:09.516] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:53:09.518] [INFO] info - pramas: post {}
+[2022-03-03T18:55:37.282] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:55:46.913] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:55:46.915] [INFO] info - pramas: post {}
+[2022-03-03T18:59:05.887] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T18:59:17.431] [INFO] info - pramas: get {}
+[2022-03-03T18:59:17.432] [INFO] info - pramas: post {"userName":"admin","userPwd":"admin"}
+[2022-03-03T18:59:21.441] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T18:59:21.442] [INFO] info - pramas: post {}
+[2022-03-03T19:00:10.520] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T19:00:20.271] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T19:00:32.841] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T19:00:32.842] [INFO] info - pramas: post {}
+[2022-03-03T19:00:51.073] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T19:01:01.571] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T19:01:01.572] [INFO] info - pramas: post {}
+[2022-03-03T19:02:26.892] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T19:02:35.458] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T19:02:35.459] [INFO] info - pramas: post {}
+[2022-03-03T19:03:31.467] [INFO] info - pramas: get {}
+[2022-03-03T19:03:31.468] [INFO] info - pramas: post {}
+[2022-03-03T19:04:19.757] [INFO] info - pramas: get {}
+[2022-03-03T19:04:19.758] [INFO] info - pramas: post {}
+[2022-03-03T19:05:23.307] [INFO] info - pramas: get {}
+[2022-03-03T19:05:23.308] [INFO] info - pramas: post {}
+[2022-03-03T19:05:30.935] [INFO] info - pramas: get {}
+[2022-03-03T19:05:30.935] [INFO] info - pramas: post {}
+[2022-03-03T19:05:52.970] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T19:05:52.972] [INFO] info - pramas: post {}
+[2022-03-03T19:05:58.772] [INFO] info - pramas: get {}
+[2022-03-03T19:05:58.773] [INFO] info - pramas: post {}
+[2022-03-03T19:06:13.780] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T19:06:13.782] [INFO] info - pramas: post {}
+[2022-03-03T19:06:21.450] [INFO] info - pramas: get {}
+[2022-03-03T19:06:21.451] [INFO] info - pramas: post {}
+[2022-03-03T19:06:21.713] [INFO] info - pramas: get {}
+[2022-03-03T19:06:21.714] [INFO] info - pramas: post {}
+[2022-03-03T19:06:29.029] [INFO] info - pramas: get {}
+[2022-03-03T19:06:29.030] [INFO] info - pramas: post {}
+[2022-03-03T19:06:29.424] [INFO] info - pramas: get {}
+[2022-03-03T19:06:29.425] [INFO] info - pramas: post {}
+[2022-03-03T19:06:36.460] [INFO] info - pramas: get {}
+[2022-03-03T19:06:36.460] [INFO] info - pramas: post {}
+[2022-03-03T19:06:36.845] [INFO] info - pramas: get {}
+[2022-03-03T19:06:36.846] [INFO] info - pramas: post {}
+[2022-03-03T19:06:39.197] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T19:06:39.198] [INFO] info - pramas: post {}
+[2022-03-03T19:06:46.946] [INFO] info - pramas: get {"menuState":"1","menuName":"222","menustate":"1"}
+[2022-03-03T19:06:46.947] [INFO] info - pramas: post {}
+[2022-03-03T19:06:48.706] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T19:06:48.708] [INFO] info - pramas: post {}
+[2022-03-03T19:07:00.250] [INFO] info - pramas: get {}
+[2022-03-03T19:07:00.250] [INFO] info - pramas: post {}
+[2022-03-03T19:07:00.511] [INFO] info - pramas: get {}
+[2022-03-03T19:07:00.512] [INFO] info - pramas: post {}
+[2022-03-03T19:58:13.832] [INFO] info - ****数据库连接成功 *****

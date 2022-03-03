@@ -10,13 +10,6 @@
             placeholder="请输入角色名称"
           ></el-input>
         </el-form-item>
-        <el-form-item label="菜单状态" prop="menustate">
-          <el-select placeholder="请选择菜单状态" v-model="queryForm.menustate">
-            <!-- 该处动态绑定是数值类型，直接写是字符串类型 -->
-            <el-option :value="1" label="正常"></el-option>
-            <el-option :value="2" label="停用"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="getRoleList">查询</el-button>
           <el-button @click="handleReset('form')">重置</el-button>
@@ -233,13 +226,13 @@ function handleReset(form) {
   proxy.$refs[form].resetFields();
 }
 // 新增菜单
-function handleAdd(row) {
+async function handleAdd(row) {
   // 弹出弹窗
   showModel.value = true;
   // 创建
   action.value = "create";
   await proxy.$api.roleOperate({ row, action });
-  proxy.$message.success("删除成功");
+  proxy.$message.success("创建成功");
   getRoleList();
 }
 function handleEdit(row: any) {
