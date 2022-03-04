@@ -210,3 +210,35 @@
 [2022-03-03T19:07:00.511] [INFO] info - pramas: get {}
 [2022-03-03T19:07:00.512] [INFO] info - pramas: post {}
 [2022-03-03T19:58:13.832] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T19:59:11.917] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:01:34.437] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:04:10.923] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:04:31.957] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:05:02.960] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:06:23.876] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T20:06:23.877] [INFO] info - pramas: post {}
+[2022-03-03T20:06:24.559] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T20:06:24.559] [INFO] info - pramas: post {}
+[2022-03-03T20:06:28.355] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T20:06:28.356] [INFO] info - pramas: post {}
+[2022-03-03T20:06:31.505] [INFO] info - pramas: get {}
+[2022-03-03T20:06:31.506] [INFO] info - pramas: post {}
+[2022-03-03T20:06:31.859] [INFO] info - pramas: get {}
+[2022-03-03T20:06:31.860] [INFO] info - pramas: post {}
+[2022-03-03T20:06:48.112] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:07:45.653] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:08:01.609] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:08:08.574] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:08:28.067] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:10:21.631] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T20:10:21.632] [INFO] info - pramas: post {}
+[2022-03-03T20:10:47.882] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T20:10:47.883] [INFO] info - pramas: post {}
+[2022-03-03T20:10:55.741] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T20:10:55.742] [INFO] info - pramas: post {}
+[2022-03-03T20:10:57.873] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T20:10:57.874] [INFO] info - pramas: post {}
+[2022-03-03T20:11:04.166] [INFO] info - pramas: get {"menuState":"1"}
+[2022-03-03T20:11:04.167] [INFO] info - pramas: post {}
+[2022-03-03T20:11:47.063] [INFO] info - ****数据库连接成功 *****
+[2022-03-03T20:13:44.120] [INFO] info - ****数据库连接成功 *****

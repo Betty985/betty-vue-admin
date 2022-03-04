@@ -3,6 +3,8 @@
  */
 // 导入 ueserSchema
 const user = require("./../modules/userSchema");
+const Menu = require("./../modules/menuSchema");
+const Role = require("./../modules/roleSchema");
 const router = require("koa-router")();
 const util = require("./../utils/util");
 const jwt = require("jsonwebtoken");
@@ -85,9 +87,6 @@ router.get("/list", async (ctx) => {
   } catch (error) {
     ctx.body = util.fail(`查询异常:${error.stack}`);
   }
-});
-router.get("/bar", function (ctx, next) {
-  ctx.body = "this is a users/bar response";
 });
 // 用户删除/批量删除
 router.post("/delete", async (ctx) => {
@@ -189,7 +188,34 @@ router.get("/all/list", async (ctx) => {
 });
 // 动态获取用户权限菜单
 router.get("/getPermissionList", async (ctx) => {
-  // 不区分大小写
+  // authorization不区分大小写
   let authorization = ctx.request.headers.authorization;
+  let { data } = util.decoded(authorization);
+  let menulist = await getMenuList(data.role, data.roleList);
+  ctx.body = util.success(menulist);
 });
+async function getMenuList(userRole, roleKeys) {
+  let rootList = [];
+  // 管理员
+  if (userRole == 0) {
+    rootList = (await Menu.find({})) || [];
+  } else {
+    // 根据用户拥有的角色，获取权限列表
+    // 先查找用户对应的角色有哪些
+    let roleList = await Role.find({ _id: { $in: roleKeys } });
+    // 过滤掉重复的权限
+    let permissionList = [];
+    roleList.map((role) => {
+      let { checkedKeys, halfCheckedKeys } = role.permissionlist;
+      permissionList = permissionList.concat([
+        ...checkedKeys,
+        ...halfCheckedKeys,
+      ]);
+    });
+    // 对permission去重
+    permissionList = [...new Set(permissionList)];
+    rootList = await Menu.find({ _id: { $in: permissionList } });
+  }
+  return util.getTreeMenu(rootList, null, []);
+}
 module.exports = router;

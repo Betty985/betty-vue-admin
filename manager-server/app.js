@@ -51,6 +51,7 @@ app.use(async (ctx, next) => {
   log4js.info(`pramas: get ${JSON.stringify(ctx.request.query)}`);
   log4js.info(`pramas: post ${JSON.stringify(ctx.request.body)}`);
   const start = new Date();
+  // 没有token会被拦截
   await next().catch((err) => {
     // 401	Unauthorized	请求要求用户的身份认证
     if (err.status == "401") {

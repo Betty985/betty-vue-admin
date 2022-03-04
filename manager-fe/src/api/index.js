@@ -104,4 +104,11 @@ export default {
       data: params,
     });
   },
+  getPermissionList() {
+    return request({
+      url: "/users/getPermissionList",
+      method: "post",
+      data: {},
+    });
+  },
 };
