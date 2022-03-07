@@ -4,7 +4,6 @@ import { onMounted, reactive } from "vue";
 import { getCurrentInstance } from "vue";
 import { router } from "../router";
 import treeMenu from "@c/TreeMenu.vue";
-import { userInfo } from "os";
 let { proxy } = getCurrentInstance();
 
 let data = reactive({
@@ -34,14 +33,17 @@ async function getNocticeCount() {
 }
 async function getMenuList() {
   try {
-    const list = await proxy.$api.getMenuList();
-    data.userMenu = list;
+    const { menuList, actionList } = await proxy.$api.getMenuList();
+    data.userMenu = menuList;
+    proxy.$store.commit("saveUserMenu", menuList);
+    proxy.$store.commit("saveUserAction", actionList);
   } catch (err) {
     console.error(err);
   }
 }
 onMounted(() => {
   getNocticeCount();
+  getMenuList();
 });
 </script>
 

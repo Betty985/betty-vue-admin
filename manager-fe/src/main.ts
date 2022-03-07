@@ -15,6 +15,27 @@ let app = createApp(App);
 Object.keys(Icons).forEach((key) => {
   app.component(key, Icons[key]);
 });
+// 全局指令    指令名称  obj
+app.directive("has", {
+  // el:是自定义指令应用的元素  binding:是vue提供的
+  beforeMount: (el, binding) => {
+    // 获取按钮权限
+    let userAction = storage.getItem("userAction");
+    // 权限标识
+    let value = binding.value;
+    // 判断列表中是否有对应的按钮权限标识
+    let hasPermission = userAction.includes(value);
+    // 没有标识
+    if (!hasPermission) {
+      // 隐藏
+      el.style.display = "none";
+      // 移除元素，但此时还是vnode，所以外面嵌套定时器，加入任务队列
+      setTimeout(() => {
+        el.parentNode.removeChild(el);
+      }, 0);
+    }
+  },
+});
 app.use(ElementPlus, { size: "small" });
 app.config.globalProperties.$api = api;
 app.config.globalProperties.$storage = storage;

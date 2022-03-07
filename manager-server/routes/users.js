@@ -192,7 +192,9 @@ router.get("/getPermissionList", async (ctx) => {
   let authorization = ctx.request.headers.authorization;
   let { data } = util.decoded(authorization);
   let menulist = await getMenuList(data.role, data.roleList);
-  ctx.body = util.success(menulist);
+  // menulist是引用类型，不能直接操作数组。通过json的方法深拷贝
+  let actionList = getActionList(JSON.parse(JSON.stringify(menulist)));
+  ctx.body = util.success({ menulist, actionList });
 });
 async function getMenuList(userRole, roleKeys) {
   let rootList = [];
@@ -217,5 +219,24 @@ async function getMenuList(userRole, roleKeys) {
     rootList = await Menu.find({ _id: { $in: permissionList } });
   }
   return util.getTreeMenu(rootList, null, []);
+}
+function getActionList(list) {
+  const actionList = [];
+  // 递归
+  const deep = (arr) => {
+    while (arr.length) {
+      let item = arr.pop();
+      if (item.action) {
+        item.action.map((action) => {
+          actionList.push(action.menuCode);
+        });
+      }
+      if (!item.action && item.children) {
+        deep(item.children);
+      }
+    }
+  };
+  deep(list);
+  return actionList;
 }
 module.exports = router;

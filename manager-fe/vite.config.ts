@@ -11,6 +11,7 @@ const alias = {
   "@c": pathResolve("src/components"),
   "@u": pathResolve("src/utils"),
   "@v": pathResolve("src/views"),
+  "@r": pathResolve("src/router"),
 };
 export default defineConfig({
   plugins: [vue()],

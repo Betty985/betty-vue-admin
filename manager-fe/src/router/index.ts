@@ -75,6 +75,7 @@ const routerArr = [
   {
     path: "/:pathMatch(.*)*",
     name: "404",
+    meta: { title: "页面不存在" },
     component: () => import("@/views/404/index.vue"),
   },
 ] as any;

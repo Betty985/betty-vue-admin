@@ -64,6 +64,10 @@ export default {};
 
 - position+margin
 
+## vh
+
+动态计算属性，动态计算视窗的高度
+
 ## BFC
 
 作用：清除浮动、包裹浮动、避免边距塌陷
