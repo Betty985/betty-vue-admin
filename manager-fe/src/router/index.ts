@@ -1,4 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import storage from "@u/storage.js";
+import API from "@/api";
+import util from "@u/utils.js";
+import { ElMessage } from "element-plus";
 const routerArr = [
   {
     path: "/",
@@ -10,7 +14,6 @@ const routerArr = [
     // meta可以加权限
     meta: {
       title: "首页",
-      zyh: false,
     },
     component: () => import("@/views/Home.vue"),
     children: [
@@ -63,6 +66,7 @@ const routerArr = [
     name: "login",
     component: () => import("@/views/login.vue"),
     meta: {
+      public: true,
       title: "登录页",
     },
   },
@@ -73,13 +77,13 @@ const routerArr = [
     component: () => import("@/views/test/index.vue"),
   },
   {
-    path: "/:pathMatch(.*)*",
+    path: "/404",
     name: "404",
     meta: { title: "页面不存在" },
     component: () => import("@/views/404/index.vue"),
   },
 ] as any;
-
+// 创建路由实例
 const router = createRouter({
   history: createWebHashHistory(),
   routes: routerArr,
@@ -98,5 +102,42 @@ const router = createRouter({
     });
   },
 });
-
+// 动态路由
+async function loadAsyncRoutes() {
+  let userInfo = storage.getItem('userInfo') || {}
+  if (userInfo.token) {
+    const { menuList } =  await API.getPermissionList()
+    let routes = util.generateRoute(menuList)
+    routes.map(route => {
+      let url = `./../views/${route.component}.vue`
+      route.component = () => import(url)
+      router.addRoute('system', route)
+    })
+  }
+}
+loadAsyncRoutes()
+// 声明"全局导航守卫"
+// 参数为守卫方法，访问路由规则就会触发守卫方法
+router.beforeEach((to, from, next) => {
+  // to 目标路由对象
+  // from 当前导航正要离开的路由对象
+  // next 一个函数，表示放行。不声明next形参，默认允许用户访问每一个路由。
+  // 声明形参，但是不调用next函数，不允许访问任何一个路由
+  let token =
+    JSON.parse(storage.getItem('userInfo') ?.userInfo?.token || "";
+  if (!to.meta.public && !token) {
+    ElMessage({
+      message: "请先登录",
+      type: "error",
+    });
+    return next("/login");
+  }
+  if (router.hasRoute(to.name)) {
+    document.title = to.meta.title;
+    next();
+  } else {
+    next("/404");
+  }
+});
+// 导出路由对象
 export { router };

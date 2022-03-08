@@ -87,6 +87,44 @@ export default {};
 
 ## 生命周期函数：在**某个时刻** **自动执行**的函数
 
+## 导航守卫
+
+导航守卫可以控制路由访问权限。
+
+```js
+// 声明"全局导航守卫"
+// 参数为守卫方法，访问路由规则就会触发守卫方法
+router.beforeEach((to, from, next) => {
+  // to 目标路由对象
+  // from 当前导航正要离开的路由对象
+  // next 一个函数，表示放行。不声明next形参，默认允许用户访问每一个路由。
+  // 声明形参，但是不调用next函数，不允许访问任何一个路由
+});
+```
+
+next 函数的三种调用方法
+
+- 直接放行
+- 强制其停留在当前页面 next(false)
+- 强制跳转到指定页面 next('/login')
+
+### 常用 API
+
+beforEach(),afterEach(),getRoutes()、push()、back()、addRoute()、
+
+- hasRoute():判断路由是否存在
+
+### 404
+
+- [正则]https://router.vuejs.org/zh/guide/essentials/dynamic-matching.html#%E6%8D%95%E8%8E%B7%E6%89%80%E6%9C%89%E8%B7%AF%E7%94%B1%E6%88%96-404-not-found-%E8%B7%AF%E7%94%B1)
+- next('/404')s
+
+## 动态路由
+
+url 必须提取出来
+地址必须添加.vue 后缀
+不可以使用@/views
+
 # 数据可视化
 
 - opengl、skia
@@ -109,3 +147,7 @@ document.exitFullscreen();
 - 把库全部导入放在全局
 - 按需导入
 - 分析源码(如该位置的内容类型)
+
+# 权限控制
+
+动态指令
