@@ -14,6 +14,7 @@ const users = require("./routes/users");
 const menus = require("./routes/menus");
 const roles = require("./routes/roles");
 const depts = require("./routes/depts");
+const leaves = require("./routes/leaves");
 const util = require("./utils/util");
 
 // 加载koa-router并调用方法
@@ -50,7 +51,6 @@ app.use(async (ctx, next) => {
   // 把参数记录到日志里
   log4js.info(`pramas: get ${JSON.stringify(ctx.request.query)}`);
   log4js.info(`pramas: post ${JSON.stringify(ctx.request.body)}`);
-  const start = new Date();
   // 没有token会被拦截
   await next().catch((err) => {
     // 401	Unauthorized	请求要求用户的身份认证
@@ -63,8 +63,6 @@ app.use(async (ctx, next) => {
       throw err;
     }
   });
-  const ms = new Date() - start;
-  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
 app.use(
@@ -88,10 +86,11 @@ router.get("/users/login", (ctx) => {
   ctx.body = playload;
   return 3;
 });
-router.use(users.routes(), users.allowedMethods()); //1级路由 加载用户模块路由和用户模块的方法
+router.use(users.routes(), users.allowedMethods()); //2级路由 加载用户模块路由和用户模块的方法
 router.use(menus.routes(), menus.allowedMethods());
 router.use(roles.routes(), roles.allowedMethods());
 router.use(depts.routes(), depts.allowedMethods());
+router.use(leaves.routes(), leaves.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods()); //加载全部的路由
 // error-handling
