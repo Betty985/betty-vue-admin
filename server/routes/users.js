@@ -39,7 +39,7 @@ router.post("/login", async (ctx, next) => {
         userName,
         userPwd,
       },
-      "userName userEmail"
+      "userId userName userEmail state role deptId roleList"
     );
     // res返回的是一个数组
     if (res) {
@@ -191,10 +191,12 @@ router.get("/getPermissionList", async (ctx) => {
   // authorization不区分大小写
   let authorization = ctx.request.headers.authorization;
   let { data } = util.decoded(authorization);
+  // 这句话有问题？data下面没有role和roleList
   let menulist = await getMenuList(data.role, data.roleList);
+  ctx.body = menulist;
   // menulist是引用类型，不能直接操作数组。通过json的方法深拷贝
-  let actionList = getActionList(JSON.parse(JSON.stringify(menulist)));
-  ctx.body = util.success({ menulist, actionList });
+  // let actionList = getActionList(JSON.parse(JSON.stringify(menulist)));
+  // ctx.body = util.success({ menulist, actionList });
 });
 async function getMenuList(userRole, roleKeys) {
   let rootList = [];

@@ -6,8 +6,7 @@ export default {
     let fmt = rule || "yyyy-MM-dd hh:mm:ss";
     // 年份是四位的要单独处理
     if (/y+/.test(fmt)) {
-      let item = new RegExp(`(${k})`).exec(fmt)[0];
-      fmt = fmt.replace(item, date.getFullYear());
+      fmt = fmt.replace(RegExp.$1, date.getFullYear());
     }
     const o = {
       "M+": date.getMonth() + 1,

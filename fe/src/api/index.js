@@ -107,7 +107,7 @@ export default {
   getPermissionList() {
     return request({
       url: "/users/getPermissionList",
-      method: "post",
+      method: "get",
       data: {},
     });
   },

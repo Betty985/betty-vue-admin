@@ -5,14 +5,12 @@ const util = require("../utils/util");
 router.prefix("/menu");
 // 菜单列表查询
 router.get("/list", async (ctx) => {
-  console.log(1);
   const { menuName, menuState } = ctx.request.query;
   const params = {};
   if (menuName) params.menuName = menuName;
   if (menuState) params.menuState = menuState;
   //所有列表字段  过滤
   let rootList = (await Menu.find(params)) || [];
-  //   rootList是所有列表字段， 第二个参数是菜单的parentid，第三个参数是叶子节点的数组？
   let permissionList = util.getTreeMenu(rootList, null, []);
   ctx.body = util.success(permissionList);
 });
@@ -21,7 +19,7 @@ router.get("/list", async (ctx) => {
 // ctx：上下文环境
 router.post("/operate", async (ctx) => {
   // 去掉id和action的其他参数为params
-  const { _id, action, ...params } = ctx.request.body;
+  const { _id, action, params } = ctx.request.body;
   let res, info;
   try {
     if (action == "add") {

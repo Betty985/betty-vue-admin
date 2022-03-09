@@ -102,20 +102,12 @@ const router = createRouter({
     });
   },
 });
-// 动态路由
-async function loadAsyncRoutes() {
-  let userInfo = storage.getItem('userInfo') || {}
-  if (userInfo.token) {
-    const { menuList } =  await API.getPermissionList()
-    let routes = util.generateRoute(menuList)
-    routes.map(route => {
-      let url = `./../views/${route.component}.vue`
-      route.component = () => import(url)
-      router.addRoute('system', route)
-    })
-  }
+
+// 判断空对象
+function isEmptyObject(obj) {
+  return Object.keys(obj).length <= 0;
 }
-loadAsyncRoutes()
+
 // 声明"全局导航守卫"
 // 参数为守卫方法，访问路由规则就会触发守卫方法
 router.beforeEach((to, from, next) => {
@@ -123,8 +115,8 @@ router.beforeEach((to, from, next) => {
   // from 当前导航正要离开的路由对象
   // next 一个函数，表示放行。不声明next形参，默认允许用户访问每一个路由。
   // 声明形参，但是不调用next函数，不允许访问任何一个路由
-  let token =
-    JSON.parse(storage.getItem('userInfo') ?.userInfo?.token || "";
+  let data = storage.getItem("userInfo");
+  let token = !isEmptyObject(data) ? data.token : "";
   if (!to.meta.public && !token) {
     ElMessage({
       message: "请先登录",
@@ -132,6 +124,8 @@ router.beforeEach((to, from, next) => {
     });
     return next("/login");
   }
+  // 动态路由开始
+  loadAsyncRoutes();
   if (router.hasRoute(to.name)) {
     document.title = to.meta.title;
     next();
@@ -139,5 +133,22 @@ router.beforeEach((to, from, next) => {
     next("/404");
   }
 });
+
+// 动态路由
+async function loadAsyncRoutes() {
+  let userInfo = storage.getItem("userInfo") || {};
+  if (userInfo.token) {
+    console.log(1);
+    // 请求后端路由接口
+    const { menuList } = await API.getPermissionList();
+    let routes = util.generateRoute(menuList);
+    routes.map((route) => {
+      let url = `./../views/${route.component}.vue`;
+      route.component = () => import(url);
+      router.addRoute("system", route);
+    });
+  }
+}
+
 // 导出路由对象
 export { router };

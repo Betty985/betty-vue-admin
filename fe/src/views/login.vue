@@ -4,7 +4,6 @@ import testLink from "@c/link/index.vue";
 import { getCurrentInstance, onMounted } from "@vue/runtime-core";
 import myIcon from "@c/myIcon.vue";
 import { reactive, ref } from "vue";
-import { log } from "console";
 // import { Search } from "@element-plus/icons-vue";
 let router = useRouter();
 // 解构

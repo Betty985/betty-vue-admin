@@ -145,7 +145,7 @@ import { getCurrentInstance, onMounted } from "@vue/runtime-core";
 import utils from "@u/utils.js";
 import { ref } from "vue";
 // 菜单列表
-let menuList = reactive([]);
+let menuList = ref([]);
 // 新增表单字段
 let menuForm = reactive({
   parentId: [null],
@@ -201,7 +201,7 @@ const columns = reactive([
     label: "创建时间",
     prop: "createTime",
     formatter(row, column, value) {
-      return utils.formateDate(new Date(value));
+      return utils.formatDate(new Date(value));
     },
   },
 ]);
@@ -232,7 +232,7 @@ const { proxy } = getCurrentInstance();
 async function getMenuList() {
   try {
     let list = await proxy.$api.getMenuList(queryForm);
-    menuList = list;
+    menuList.value = list;
   } catch (e) {
     console.error(e);
   }
@@ -281,8 +281,8 @@ function handleSubmit() {
   // valid为false说明校验失败
   proxy.$refs.dialogForm.validate(async (valid) => {
     if (valid) {
-      let { action, menuForm } = proxy.$refs;
-      let params = { ...menuForm, action };
+      console.log(menuForm);
+      let params = { params: menuForm, action: action.value };
       let res = await proxy.$api.menuSubmit(params);
       showModel.value = false;
       proxy.$message.success("操作成功");

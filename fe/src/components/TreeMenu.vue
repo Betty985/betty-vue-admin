@@ -36,7 +36,7 @@ const { id, a, tableData } = toRefs(userMenu);
   <div>
     <!-- 根元素只能有一个，v-for是循环,返回更多的元素，所以v-for放在根元素上Vue会不知道怎么渲染。 -->
     <template v-for="menu in tableData">
-      <el-submenu
+      <el-sub-menu
         v-if="
           menu.children &&
           menu.children.length > 0 &&
@@ -50,7 +50,7 @@ const { id, a, tableData } = toRefs(userMenu);
           <span>{{ menu.menuName }}</span>
         </template>
         <tree-menu :userMenu="menu.children"></tree-menu>
-      </el-submenu>
+      </el-sub-menu>
       <!--  menu.menuType等于2是按钮-->
       <el-menu-item
         v-else-if="menu.menuType === 1"
