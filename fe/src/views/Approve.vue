@@ -14,7 +14,7 @@
         </el-form-item>
         <el-form-item>
           <el-button @click="getApplyList" type="primary">查询</el-button>
-          <el-button @click="handleReset(form)">重置</el-button>
+          <el-button @click="handleReset('form')">重置</el-button>
         </el-form-item>
       </el-form>
     </div>

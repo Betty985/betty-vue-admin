@@ -1,40 +1,37 @@
 <script setup lang="ts">
 import BreadCrumb from "@c/BreadCroumb.vue";
-import { onMounted, reactive } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { getCurrentInstance } from "vue";
 import { router } from "../router";
 import treeMenu from "@c/TreeMenu.vue";
 let { proxy } = getCurrentInstance();
-
-let data = reactive({
-  isCollapse: false,
-  userInfo: proxy.$store.state.userInfo,
-  noticeCount: 3,
-  userMenu: [],
-  activeMenu: location.hash.slice(1),
-});
+let isCollapse = ref(false);
+let noticeCount = ref(3);
+let userMenu = ref([]);
+let activeMenu = ref(location.hash.slice(1));
+let userInfo = reactive(proxy.$store.state.userInfo);
 function toggle() {
-  data.isCollapse = !data.isCollapse;
+  isCollapse.value = !isCollapse;
 }
 
 function handleLogout(key: string) {
-  if (key === "email") return;
+  if (key !== "logout") return;
   proxy.$store.commit("saveUserInfo", "");
-  data.userInfo = {};
+  userInfo = {};
   router.push("/login");
 }
 async function getNocticeCount() {
   try {
     const count = await proxy.$api.noticeCount();
-    data.noticeCount = count;
+    noticeCount.value = count;
   } catch (err) {
     console.error(err);
   }
 }
 async function getMenuList() {
   try {
-    const { menuList, actionList } = await proxy.$api.getMenuList();
-    data.userMenu = menuList;
+    const { menuList, actionList } = await proxy.$api.getPermissionList();
+    userMenu = menuList;
     proxy.$store.commit("saveUserMenu", menuList);
     proxy.$store.commit("saveUserAction", actionList);
   } catch (err) {
@@ -49,28 +46,25 @@ onMounted(() => {
 
 <template>
   <div class="basic-layout">
-    <div :class="['nav-side', data.isCollapse ? 'fold' : 'unfold']">
+    <div :class="['nav-side', isCollapse ? 'fold' : 'unfold']">
       <!-- 系统LOGO -->
       <div class="logo">
-        <img
-          src="https://img1.baidu.com/it/u=1132789667,1628966653&fm=253&fmt=auto&app=138&f=JPEG?w=225&h=170"
-          style="width: 10px"
-        />
+        <img src="@/assets/logo.png" style="width: 10px" />
         <span>Manager</span>
       </div>
       <!-- 导航菜单 -->
       <el-menu
-        :default-active="data.activeMenu"
+        :default-active="activeMenu"
         background-color="#001529"
         text-color="#fff"
         router
-        :collapse="data.isCollapse"
+        :collapse="isCollapse"
         class="nav-menu"
       >
-        <tree-menu :userMenu="data.userMenu" />
+        <tree-menu :userMenu="userMenu" />
       </el-menu>
     </div>
-    <div :class="['content-right', data.isCollapse ? 'fold' : 'unfold']">
+    <div :class="['content-right', isCollapse ? 'fold' : 'unfold']">
       <div class="nav-top">
         <div class="nav-left">
           <div class="menu-fold" @click="toggle">
@@ -82,21 +76,21 @@ onMounted(() => {
         </div>
         <div class="user-info">
           <el-badge
-            :is-dot="data.noticeCount > 0 ? true : false"
+            :is-dot="noticeCount > 0 ? true : false"
             class="notice"
             type="danger"
           >
             <el-icon><bell /></el-icon>
           </el-badge>
-          <el-dropdown @command="handleLogout">
+          <el-dropdown @command="handleLogout" class="user-drop">
             <span class="user-link">
-              {{ data.userInfo.userName }}
+              {{ userInfo.userName }}
               <el-icon><right /></el-icon>
             </span>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item command="email"
-                  >邮箱：{{ data.userInfo.userEmail }}</el-dropdown-item
+                  >邮箱：{{ userInfo.userEmail }}</el-dropdown-item
                 >
                 <el-dropdown-item command="logout">退出</el-dropdown-item>
               </el-dropdown-menu>
@@ -120,16 +114,18 @@ onMounted(() => {
     height: 100vh;
     background-color: #001529;
     color: #fff;
+    overflow-x: hidden;
     overflow-y: auto;
     transition: width 0.5s;
+    z-index: 9;
     .logo {
+      height: 50px;
       display: flex;
       align-items: center;
+      text-align: center;
       font-size: 18px;
-      height: 50px;
       img {
         margin: 0 16px;
-        width: 32px;
         height: 32px;
       }
     }
@@ -137,25 +133,15 @@ onMounted(() => {
       height: calc(100vh - 50px);
       border-right: none;
     }
-    // 合并
     &.fold {
       width: 64px;
     }
-    // 展开
     &.unfold {
       width: 200px;
     }
   }
   .content-right {
     margin-left: 200px;
-    // 合并
-    &.fold {
-      margin-left: 64px;
-    }
-    // 展开
-    &.unfold {
-      margin-left: 200px;
-    }
     .nav-top {
       height: 50px;
       line-height: 50px;
@@ -167,17 +153,16 @@ onMounted(() => {
         display: flex;
         align-items: center;
         .menu-fold {
-          margin-right: 15px;
+          margin-right: 16px;
           font-size: 18px;
         }
       }
       .user-info {
         .notice {
           line-height: 30px;
-          margin-right: 15px;
+          margin-right: 16px;
         }
         .user-link {
-          line-height: 45px;
           cursor: pointer;
           color: #409eff;
         }
@@ -187,10 +172,12 @@ onMounted(() => {
       background: #eef0f3;
       padding: 20px;
       height: calc(100vh - 50px);
-      .main-page {
-        background: #fff;
-        height: 100%;
-      }
+    }
+    &.fold {
+      margin-left: 64px;
+    }
+    &.unfold {
+      margin-left: 200px;
     }
   }
 }

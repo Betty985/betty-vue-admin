@@ -18,14 +18,20 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="getMenuList">查询</el-button>
+          <el-button type="primary" @click="getMenuList" v-has="'menu-query'"
+            >查询</el-button
+          >
           <el-button @click="handleReset(queryForm)">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
     <div class="base-table">
       <div class="action">
-        <el-button type="primary" @click="handleAdd(1)">新增</el-button>
+        <el-button
+          type="primary"
+          @click="handleAdd(1)"
+          v-has="'menu-create'"
+        ></el-button>
       </div>
       <!-- 渲染树形菜单需要rolekey -->
       <el-table
@@ -48,9 +54,13 @@
               @click="handleAdd(2, scope.row)"
               size="mini"
               type="primary"
+              v-has="'menu-create'"
               >新增</el-button
             >
-            <el-button @click="handleEdit(scope.row)" size="mini"
+            <el-button
+              @click="handleEdit(scope.row)"
+              size="mini"
+              v-has="'menu-edit'"
               >编辑</el-button
             >
             <!-- 当前对象这一行 -->
@@ -58,6 +68,7 @@
               type="danger"
               @click="handleDel(scope.row._id)"
               size="mini"
+              v-has="'menu-delete'"
               >删除</el-button
             >
           </template>
