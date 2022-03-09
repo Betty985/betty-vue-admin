@@ -1,8 +1,169 @@
+<template>
+  <div class="Leave-manage">
+    <div class="query-form">
+      <!-- 行内表单 -->
+      <el-form :inline="true" ref="form" :model="queryForm">
+        <!-- 不设置prop会导致无法重置，通过prop添加底层是可以获取到的 -->
+        <el-form-item label="审批状态" prop="applyState">
+          <el-select
+            placeholder="请选择用户状态"
+            v-model="queryForm.applyState"
+          >
+            <!-- 该处动态绑定是数值类型，直接写是字符串类型 -->
+            <el-option value="" label="全部"></el-option>
+            <el-option :value="1" label="待审批"></el-option>
+            <el-option :value="2" label="审批中"></el-option>
+            <el-option :value="3" label="审批拒绝"></el-option>
+            <el-option :value="4" label="审批通过"></el-option>
+            <el-option :value="5" label="作废"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="getApplyList">查询</el-button>
+          <el-button @click="handleReset('form')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+    <div class="base-table">
+      <div class="action">
+        <el-button type="primary" @click="handleApply">申请休假</el-button>
+      </div>
+      <el-table :data="applyList">
+        <el-table-column type="selection" width="55" />
+        <el-table-column
+          v-for="item in columns"
+          :key="item.prop"
+          :prop="item.prop"
+          :lable="item.label"
+          :formatter="item.formatter"
+          :width="item.width"
+        ></el-table-column>
+        <el-table-column label="操作" width="150">
+          <template #default="scope">
+            <el-button @click="handleDetail(scope.row)" size="mini"
+              >查看</el-button
+            >
+            <!-- 当前对象这一行 -->
+            <el-button
+              @click="handleDelete(scope.row._id)"
+              v-if="[1, 2].includes(scope.row.applyState)"
+              type="danger"
+              size="mini"
+              >作废</el-button
+            >
+          </template>
+        </el-table-column>
+      </el-table>
+      <el-pagination
+        class="pagination"
+        background
+        layout="prev, pager, next"
+        :total="1000"
+        :pageSize="pager.pageSize"
+        @current-change="handleCurrentChange"
+      />
+    </div>
+    <el-dialog title="申请休假" v-model="showModel" width="70%">
+      <!-- ref和model的值一样会导致表单无法输入 -->
+      <el-form
+        ref="dialogForm"
+        :model="leaveForm"
+        label-width="120px"
+        :rules="rules"
+      >
+        <el-form-item label="休假类型" prop="applyType" required>
+          <el-select v-model="leaveForm.applyType">
+            <el-option :value="1" label="事假"></el-option>
+            <el-option :value="2" label="调休"></el-option>
+            <el-option :value="3" label="年假"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="休假时间" required>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item prop="startTime" required>
+                <el-date-picker
+                  v-model="leaveForm.startTime"
+                  type="date"
+                  placeholder="选择开始日期"
+                  @change="(val) => handleDateChange('startTime', val)"
+                ></el-date-picker>
+              </el-form-item>
+            </el-col>
+            <el-col :span="1">-</el-col>
+            <el-col :span="8">
+              <el-form-item prop="endTime" required>
+                <el-date-picker
+                  v-model="leaveForm.endTime"
+                  type="date"
+                  placeholder="选择结束日期"
+                  @change="(val) => handleDateChange('endTime', val)"
+                ></el-date-picker>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-form-item>
+        <el-form-item label="休假时长" required>
+          {{ leaveForm.leaveTime }}
+        </el-form-item>
+        <el-form-item label="休假原因" required>
+          <el-input
+            type="textarea"
+            :row="3"
+            placeholder="请输入休假原因"
+            v-model="leaveForm.reasons"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="handleClose">取消</el-button>
+          <el-button type="primary" @click="handleSubmit">确定</el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <el-dialog
+      title="申请休假详情"
+      width="50%"
+      v-model="showDetailModel"
+      destroy-on-close
+    >
+      <el-steps
+        :active="detail.applyState > 2 ? 3 : detail.applyState"
+        align-center
+      >
+        <el-step title="待审批"></el-step>
+        <el-step title="审批中"></el-step>
+        <el-step title="审批通过/审批拒绝"></el-step>
+      </el-steps>
+      <el-form label-width="120px" label-suffix=":">
+        <el-form-item label="休假类型">
+          {{ detail.applyTypeName }}
+        </el-form-item>
+        <el-form-item label="休假时间">
+          {{ detail.time }}
+        </el-form-item>
+        <el-form-item label="休假时长">
+          {{ detail.leaveTime }}
+        </el-form-item>
+        <el-form-item label="休假原因">
+          {{ detail.reasons }}
+        </el-form-item>
+        <el-form-item label="审批状态">
+          {{ detail.applyStateName }}
+        </el-form-item>
+        <el-form-item label="审批人">
+          {{ detail.curAuditUserName }}
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+  </div>
+</template>
 <script setup lang="ts">
-import { reactive, ref } from "@vue/reactivity";
+import { reactive } from "@vue/reactivity";
 import { getCurrentInstance, onMounted } from "@vue/runtime-core";
 import utils from "@u/utils";
-import { toRaw } from "vue";
+import { ref } from "vue";
 
 // 获取Composition API的上下文对象
 const { proxy } = getCurrentInstance();
@@ -10,34 +171,41 @@ const { proxy } = getCurrentInstance();
 const queryForm = reactive({
   applyState: "0",
 });
+let applyList = ref([]);
+const action = ref("create");
+const showModel = ref(false);
+const showDetailModel = ref(false);
+let detail = reactive({});
+const leaveForm = reactive({
+  applyType: 1,
+  startTime: "",
+  endTime: "",
+  leaveTime: "0天",
+  reasons: "",
+});
 // 定义表单校验规则
 const rules = reactive({
-  userName: [
+  startTime: [
     {
-      require: true,
-      message: "请输入用户名称",
-      trigger: "blur",
+      type: "date",
+      required: true,
+      message: "请输入开始日期",
+      trigger: "change",
     },
   ],
-  email: [
+  endTime: [
     {
-      require: true,
-      message: "请输入用户邮箱",
-      trigger: "blur",
+      type: "date",
+      required: true,
+      message: "请输入结束日期",
+      trigger: "change",
     },
   ],
-  mobile: [
+  reasons: [
     {
-      pattern: /1[3-9]\d{9}/,
-      message: "请输入正确的手机号格式",
-      trigger: "blur",
-    },
-  ],
-  deptId: [
-    {
-      require: true,
-      message: "请选择用户部门",
-      trigger: "blur",
+      required: true,
+      message: "请输入休假原因",
+      trigger: ["change", "blur"],
     },
   ],
 });
@@ -115,7 +283,11 @@ const columns = reactive([
     },
   },
 ]);
-const getApplyList = () => {};
+const pager = reactive({
+  pageNum: 1,
+  pageSize: 10,
+  total: 0,
+});
 // 初始化接口调用
 onMounted(() => {
   getApplyList();
@@ -123,145 +295,88 @@ onMounted(() => {
 // 分页事件处理
 let handleCurrentChange = (current) => {
   pager.pageNum = current;
-  getUserList();
+  getApplyList();
 };
 // 重置查询表单
 const handleReset = (form) => {
   // 传参是为了动态重置，关闭弹窗的时候也可以重置
   proxy.$refs[form].resetFields();
 };
+async function getApplyList() {
+  let params = { ...queryForm, ...pager };
+  let { list, page } = await proxy.$api.getApplyList(params);
+  applyList.value = list;
+  pager.total = page.total;
+}
+const handleApply = () => {
+  showModel.value = true;
+  action.value = "create";
+};
+// 弹框关闭
+const handleClose = () => {
+  showModal.value = false;
+  handleReset("dialogForm");
+};
+// 获取休假时长
+const handleDateChange = (key, val) => {
+  let { startTime, endTime } = leaveForm;
+  if (!startTime || !endTime) return;
+  if (startTime > endTime) {
+    proxy.$message.error("开始日期不能晚于结束日期");
+    leaveForm.leaveTime = "0天";
+    setTimeout(() => {
+      leaveForm[key] = "";
+    }, 0);
+  } else {
+    leaveForm.leaveTime =
+      (endTime - startTime) / (24 * 60 * 60 * 1000) + 1 + "天";
+  }
+};
+// 申请提交
+const handleSubmit = () => {
+  proxy.$refs.dialogForm.validate(async (valid) => {
+    if (valid) {
+      try {
+        let params = { ...leaveForm, action: action.value };
+        let res = await proxy.$api.leaveOperate(params);
+        proxy.$message.success("创建成功");
+        handleClose();
+        getApplyList();
+      } catch (error) {}
+    }
+  });
+};
+
+const handleDetail = (row) => {
+  let data = { ...row };
+  data.applyTypeName = {
+    1: "事假",
+    2: "调休",
+    3: "年假",
+  }[data.applyType];
+  data.time =
+    utils.formateDate(new Date(data.startTime), "yyyy-MM-dd") +
+    "到" +
+    utils.formateDate(new Date(data.endTime), "yyyy-MM-dd");
+  // 1:待审批 2:审批中 3:审批拒绝 4:审批通过 5:作废
+  data.applyStateName = {
+    1: "待审批",
+    2: "审批中",
+    3: "审批拒绝",
+    4: "审批通过",
+    5: "作废",
+  }[data.applyState];
+  detail = data;
+  showDetailModel.value = true;
+};
+
+const handleDelete = async (_id) => {
+  try {
+    let params = { _id, action: "delete" };
+    await proxy.$api.leaveOperate(params);
+    proxy.$message.success("删除成功");
+    getApplyList();
+  } catch (error) {}
+};
 </script>
-
-<template>
-  <div class="user-manage">
-    <div class="query-form">
-      <!-- 行内表单 -->
-      <el-form :inline="true" ref="form" :model="queryForm">
-        <!-- 不设置prop会导致无法重置，通过prop添加底层是可以获取到的 -->
-        <el-form-item label="审批状态" prop="applyState">
-          <el-select
-            placeholder="请选择用户状态"
-            v-model="queryForm.applyState"
-          >
-            <!-- 该处动态绑定是数值类型，直接写是字符串类型 -->
-            <el-option :value="0" label="全部"></el-option>
-            <el-option :value="1" label="待审批"></el-option>
-            <el-option :value="2" label="审批中"></el-option>
-            <el-option :value="3" label="审批拒绝"></el-option>
-            <el-option :value="4" label="审批通过"></el-option>
-            <el-option :value="5" label="作废"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="getApplyList">查询</el-button>
-          <el-button @click="handleReset('form')">重置</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
-    <div class="base-table">
-      <div class="action">
-        <el-button type="primary" @click="handleCreate">新增</el-button>
-        <el-button type="danger" @click="handlePatchDel">批量删除</el-button>
-      </div>
-      <el-table :data="applyList" @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="55" />
-        <el-table-column
-          v-for="item in columns"
-          :key="item.prop"
-          :prop="item.prop"
-          :lable="item.label"
-          :formatter="item.formatter"
-          :width="item.width"
-        ></el-table-column>
-        <el-table-column label="操作" width="150">
-          <template>
-            <el-button size="mini">查看</el-button>
-            <!-- 当前对象这一行 -->
-            <el-button type="danger" size="mini">作废</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        class="pagination"
-        background
-        layout="prev, pager, next"
-        :total="1000"
-        :pageSize="pager.pageSize"
-        @current-change="handleCurrentChange"
-      />
-    </div>
-    <el-dialog title="用户新增" v-model="showModel">
-      <!-- ref和model的值一样会导致表单无法输入 -->
-      <el-form
-        ref="dialogForm"
-        :model="userForm"
-        label-width="100px"
-        :rules="rules"
-      >
-        <el-form-item label="用户名" prop="userName">
-          <el-input
-            :disabled="action === 'edit'"
-            v-model="userForm.userName"
-            placeholder="请输入用户名称"
-          />
-        </el-form-item>
-        <el-form-item label="邮箱" prop="mobile">
-          <el-input
-            :disabled="action === 'edit'"
-            v-model="userForm.userEmail"
-            placeholder="请输入用户邮箱"
-          >
-            <template #append> @qq.com </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item label="手机号" prop="mobile">
-          <el-input v-model="userForm.mobile" placeholder="请输入手机号" />
-        </el-form-item>
-        <el-form-item label="岗位" prop="job">
-          <el-input v-model="userForm.job" placeholder="请输入岗位" />
-        </el-form-item>
-        <el-form-item label="状态" prop="state">
-          <el-select v-model="userForm.state">
-            <el-option :value="1" label="在职"></el-option>
-            <el-option :value="2" label="离职"></el-option>
-            <el-option :value="3" label="试用期"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="系统角色" prop="roleList">
-          <el-select
-            v-model="userForm.roleList"
-            placeholder="请选择对应用户系统角色"
-            mutiple
-            style="width: 100%"
-          >
-            <el-option
-              v-for="role in roleList"
-              :key="role._id"
-              :label="role.roleName"
-              :value="role._id"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="部门" prop="deptId">
-          <!-- checkStrictly指定单选，value指定用哪些字段 -->
-          <el-cascader
-            v-model="userForm.deptId"
-            placeholder="请选择对应部门"
-            :options="deptList"
-            :props="{ checkStrictly: true, value: '_id', label: 'deptName' }"
-            clearable
-            style="width: 100%"
-          />
-        </el-form-item>
-      </el-form>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="handleClose">取消</el-button>
-          <el-button type="primary" @click="handleSubmit">确定</el-button>
-        </span>
-      </template>
-    </el-dialog>
-  </div>
-</template>
-
 <style scoped></style>
