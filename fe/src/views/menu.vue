@@ -50,14 +50,14 @@
           <template #default="scope">
             <el-button
               @click="handleAdd(2, scope.row)"
-              size="mini"
+              size="small"
               type="primary"
               v-has="'menu-create'"
               >新增</el-button
             >
             <el-button
               @click="handleEdit(scope.row)"
-              size="mini"
+              size="small"
               v-has="'menu-edit'"
               >编辑</el-button
             >
@@ -65,7 +65,7 @@
             <el-button
               type="danger"
               @click="handleDel(scope.row._id)"
-              size="mini"
+              size="small"
               v-has="'menu-delete'"
               >删除</el-button
             >

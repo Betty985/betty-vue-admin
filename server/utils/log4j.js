@@ -24,9 +24,9 @@ log4js.configure({
     },
   },
   categories: {
-    default: { appenders: ["console"], level: "debug" },
+    default: { appenders: ["info"], level: "debug" },
     error: { appenders: ["error"], level: "error" },
-    info: { appenders: ["console", "info"], level: "info" },
+    info: { appenders: ["info"], level: "info" },
   },
 });
 /**

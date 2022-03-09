@@ -16,6 +16,7 @@ const user = reactive({
 const userList = ref([]);
 // 所有角色列表
 const roleList = ref([]);
+const title = ref("用户新增");
 // 所有部门列表
 const deptList = ref([]);
 // 分页插件
@@ -71,18 +72,14 @@ const rules = reactive({
   ],
   deptId: [
     {
-      require: true,
-      message: "请选择用户部门",
+      required: true,
+      message: "请选择部门",
       trigger: "blur",
     },
   ],
 });
 // 定义动态表格的格式
 const columns = reactive([
-  {
-    label: "用户ID",
-    prop: "userId",
-  },
   {
     label: "用户名称",
     prop: "userName",
@@ -100,19 +97,18 @@ const columns = reactive([
       return {
         0: "管理员",
         1: "普通用户",
-      };
+      }[value];
     },
   },
   {
     label: "用户状态",
     prop: "state",
-
-    formatter(row, column, value) {
+    formatter(row, column, val) {
       return {
         1: "在职",
         2: "离职",
         3: "试用期",
-      };
+      }[val];
     },
   },
   {
@@ -183,6 +179,7 @@ const handleSelectionChange = (list) => {
 const showModel = ref(false);
 // 用户新增
 const handleCreate = () => {
+  title.value = "用户新增";
   action.value = "add";
   showModel.value = true;
 };
@@ -192,6 +189,7 @@ const action = ref("add");
 const handleEdit = (row) => {
   action.value = "edit";
   showModel.value = true;
+  title.value = "用户编辑";
   // dom渲染完成再执行代码
   proxy.$nextTick(() => {
     // 浅拷贝
@@ -201,12 +199,12 @@ const handleEdit = (row) => {
 // 获取部门列表
 const getDeptList = async () => {
   let list = await proxy.$api.getDeptList();
-  roleList.value = list;
+  deptList.value = list;
 };
 // 获取角色列表
 const getRoleAllList = async () => {
   let list = await proxy.$api.getRoleAllList();
-  deptList.value = list;
+  roleList.value = list;
 };
 // 用户弹窗关闭
 const handleClose = () => {
@@ -223,6 +221,7 @@ const handleSubmit = () => {
       // toRaw把响应式对象变成普通对象
       let params = toRaw(userForm);
       params.userEmail += "@qq.com";
+      console.log(params);
       let res = await proxy.$api.userSubmit(params);
       if (res) {
         showModel.value = false;
@@ -293,7 +292,7 @@ const handleSubmit = () => {
           <template #default="scope">
             <el-button
               @click="handleEdit(scope.row)"
-              size="mini"
+              size="small"
               v-has="'user-eidt'"
               >编辑</el-button
             >
@@ -301,7 +300,7 @@ const handleSubmit = () => {
             <el-button
               type="danger"
               @click="handleDel(scope.row)"
-              size="mini"
+              size="small"
               v-has="'user-delete'"
               >删除</el-button
             >
@@ -317,7 +316,7 @@ const handleSubmit = () => {
         @current-change="handleCurrentChange"
       />
     </div>
-    <el-dialog title="用户新增" v-model="showModel">
+    <el-dialog :title="title" v-model="showModel">
       <!-- ref和model的值一样会导致表单无法输入 -->
       <el-form
         ref="dialogForm"

@@ -11,7 +11,7 @@ let userMenu = ref([]);
 let activeMenu = ref(location.hash.slice(1));
 let userInfo = reactive(proxy.$store.state.userInfo);
 function toggle() {
-  isCollapse.value = !isCollapse;
+  isCollapse.value = !isCollapse.value;
 }
 
 function handleLogout(key: string) {
@@ -31,7 +31,7 @@ async function getNocticeCount() {
 async function getMenuList() {
   try {
     const { menuList, actionList } = await proxy.$api.getPermissionList();
-    userMenu = menuList;
+    userMenu.value = menuList;
     proxy.$store.commit("saveUserMenu", menuList);
     proxy.$store.commit("saveUserAction", actionList);
   } catch (err) {
@@ -49,7 +49,7 @@ onMounted(() => {
     <div :class="['nav-side', isCollapse ? 'fold' : 'unfold']">
       <!-- 系统LOGO -->
       <div class="logo">
-        <img src="@/assets/logo.png" style="width: 10px" />
+        <img src="@/assets/logo.png" />
         <span>Manager</span>
       </div>
       <!-- 导航菜单 -->
@@ -125,8 +125,8 @@ onMounted(() => {
       text-align: center;
       font-size: 18px;
       img {
-        margin: 0 16px;
-        height: 32px;
+        width: 3rem;
+        margin: 0 0.43rem;
       }
     }
     .nav-menu {

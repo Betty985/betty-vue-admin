@@ -20,7 +20,7 @@ router.prefix("/roles");
 //查询所有的角色列表
 router.get("/allList", async (ctx) => {
   try {
-    const list = Role.find({}, "_id roleName");
+    const list = await Role.find({}, "_id roleName");
     ctx.body = util.success(list);
   } catch (error) {
     ctx.body = util.fail(`查询失败：${error.stack}`);
@@ -28,8 +28,8 @@ router.get("/allList", async (ctx) => {
 });
 // 按页获取角色列表
 router.get("/list", async (ctx) => {
-  const { roleName } = ctx.request.query;
-  const { page, skipIndex } = util.paper(ctx.request.query);
+  const { roleName, pageNum, pageSize } = ctx.request.query;
+  const { page, skipIndex } = util.paper(pageNum, pageSize);
   try {
     let params = {};
     // 进行过滤

@@ -20,8 +20,8 @@
     </div>
     <div class="base-table">
       <div class="action">
-        <el-button type="primary" @click="handleAdd" v-has="'role.create'"
-          >新增</el-button
+        <el-button type="primary" @click="handleCreate" v-has="'role.create'"
+          >创建</el-button
         >
       </div>
       <!-- 渲染树形菜单需要rolekey -->
@@ -31,7 +31,7 @@
           v-for="item in columns"
           :key="item.prop"
           :prop="item.prop"
-          :lable="item.label"
+          :label="item.label"
           :formatter="item.formatter"
           :width="item.width"
         ></el-table-column>
@@ -39,14 +39,14 @@
           <template #default="scope">
             <el-button
               @click="handleEdit(scope.row)"
-              size="mini"
+              size="small"
               type="primary"
               v-has="'role-edit'"
               >编辑</el-button
             >
             <el-button
               @click="handlePermission(scope.row)"
-              size="mini"
+              size="small"
               v-has="'role-permission'"
               >设置权限</el-button
             >
@@ -54,7 +54,7 @@
             <el-button
               type="danger"
               @click="handleDel(scope.row._id)"
-              size="mini"
+              size="small"
               v-has="'role-delete'"
               >删除</el-button
             >
@@ -71,7 +71,7 @@
       >
       </el-pagination>
     </div>
-    <el-dialog title="角色新增" v-model="showModel">
+    <el-dialog :title="title" v-model="showModel">
       <!-- ref和model的值一样会导致表单无法输入 -->
       <el-form
         ref="dialogForm"
@@ -134,19 +134,17 @@ import { reactive } from "@vue/reactivity";
 import { getCurrentInstance, onMounted } from "@vue/runtime-core";
 import utils from "@u/utils.js";
 import { ref } from "vue";
-import { isTemplateNode } from "@vue/compiler-core";
 // 分页插件
 const pager = reactive({
   pageNum: 1,
-  pageSize: 10,
-  total: undefined,
+  pageSize: 5,
 });
 let roleList = reactive([]);
 let menuList = reactive([]);
 // 菜单映射表
 let actionMap = reactive({});
 let action = ref("");
-//
+let title = ref("菜单");
 let curRoleName = ref("");
 // 当前角色id
 let curRoleId = ref("");
@@ -219,7 +217,7 @@ async function getMenuList() {
 }
 async function getRoleList() {
   try {
-    let { list, page } = await proxy.$api.getRoleList({
+    let { page, list } = await proxy.$api.getRoleList({
       ...queryForm,
       ...pager,
     });
@@ -237,17 +235,13 @@ onMounted(() => {
 function handleReset(form) {
   proxy.$refs[form].resetFields();
 }
-// 新增菜单
-async function handleAdd(row) {
-  // 弹出弹窗
-  showModel.value = true;
-  // 创建
+function handleCreate() {
+  title.value = "创建角色";
   action.value = "create";
-  await proxy.$api.roleOperate({ row, action });
-  proxy.$message.success("创建成功");
-  getRoleList();
+  showModel.value = true;
 }
 function handleEdit(row: any) {
+  title.value = "编辑角色";
   // 弹出弹窗后执行nextTick
   showModel.value = true;
   // 编辑
@@ -270,7 +264,7 @@ function handleSubmit() {
   // valid为false说明校验失败
   proxy.$refs.dialogForm.validate(async (valid) => {
     if (valid) {
-      let { action, roleForm } = proxy.$refs;
+      let { action, roleForm } = proxy;
       let params = { ...roleForm, action };
       let res = await proxy.$api.roleOperate(params);
       if (res) {

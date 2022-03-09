@@ -13,12 +13,18 @@ const couter = require("./../modules/couterSchema");
 const md5 = require("md5");
 //初始化
 const initData = require("./../utils/init");
+const userSchema = require("./../modules/userSchema");
 // initData(user, {
 //   userName: "admin",
 //   userPwd: "admin",
 //   userEmail: "10001@qq.com",
 // });
-
+userSchema.create({
+  userName: "admin",
+  userPwd: md5("admin"),
+  userEmail: "10001@qq.com",
+  role: 0,
+});
 router.prefix("/users");
 
 router.post("/login", async (ctx, next) => {
@@ -37,7 +43,7 @@ router.post("/login", async (ctx, next) => {
     let res = await user.findOne(
       {
         userName,
-        userPwd,
+        userPwd: md5(userPwd),
       },
       "userId userName userEmail state role deptId roleList"
     );
@@ -64,8 +70,8 @@ router.post("/login", async (ctx, next) => {
 });
 // 用户列表
 router.get("/list", async (ctx) => {
-  const { userId, userName, state } = ctx.request.query;
-  const { page, skipIndex } = util.paper(ctx.request.query);
+  const { userId, userName, state, pageNum, pageSize } = ctx.request.query;
+  const { page, skipIndex } = util.paper(pageNum, pageSize);
   let params = {};
   if (userId) params.userId = userId;
   if (userName) params.userName = userName;
@@ -95,8 +101,8 @@ router.post("/delete", async (ctx) => {
   // 每个model对象都会返回query对象，可以用query的or或in实现数组批量更新
   // user.updateMany({ $or: [{ userId: 10001 }, { userId: 10002 }] })
   const res = await user.updateMany({ userId: { $in: userIds } }, { state: 2 });
-  if (res.nModified) {
-    ctx.body = util.success(res, `共删除成功${res.nModified}条数据`);
+  if (res.modifiedCount > 0) {
+    ctx.body = util.success(res, `共删除成功${res.modifiedCount}条数据`);
     return;
   }
   ctx.body = util.fail("删除失败");
@@ -191,9 +197,9 @@ router.get("/getPermissionList", async (ctx) => {
   // authorization不区分大小写
   let authorization = ctx.request.headers.authorization;
   let { data } = util.decoded(authorization);
-  // 这句话有问题？data下面没有role和roleList
-  let menulist = await getMenuList(data.role, data.roleList);
-  ctx.body = menulist;
+  let menuList = await getMenuList(data.role, data.roleList);
+  let actionList = getAction(JSON.parse(JSON.stringify(menuList)));
+  ctx.body = util.success({ menuList, actionList });
   // menulist是引用类型，不能直接操作数组。通过json的方法深拷贝
   // let actionList = getActionList(JSON.parse(JSON.stringify(menulist)));
   // ctx.body = util.success({ menulist, actionList });
@@ -222,7 +228,7 @@ async function getMenuList(userRole, roleKeys) {
   }
   return util.getTreeMenu(rootList, null, []);
 }
-function getActionList(list) {
+function getAction(list) {
   const actionList = [];
   // 递归
   const deep = (arr) => {

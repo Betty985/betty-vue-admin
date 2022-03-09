@@ -40,7 +40,7 @@
         ></el-table-column>
         <el-table-column label="操作" width="150">
           <template #default="scope">
-            <el-button @click="handleDetail(scope.row)" size="mini"
+            <el-button @click="handleDetail(scope.row)" size="small"
               >查看</el-button
             >
             <!-- 当前对象这一行 -->
@@ -48,7 +48,7 @@
               @click="handleDelete(scope.row._id)"
               v-if="[1, 2].includes(scope.row.applyState)"
               type="danger"
-              size="mini"
+              size="small"
               >作废</el-button
             >
           </template>

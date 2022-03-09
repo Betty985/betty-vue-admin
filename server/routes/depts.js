@@ -20,7 +20,7 @@ router.get("/list", async (ctx) => {
 });
 // 递归拼接树形列表
 function getTreeDept(rootList, id, list) {
-  for (i < 0; i < rootList.length; i++) {
+  for (let i = 0; i < rootList.length; i++) {
     let item = rootList[i];
     // 判断是不是一级菜单   pop会改变数组
     // id是buffer类型，需要都转成字符串
@@ -39,6 +39,7 @@ function getTreeDept(rootList, id, list) {
     }
     // dept不需要判断是不是按钮
   });
+  return list;
 }
 // 部门的操作：创建，编辑，删除
 router.post("/operate", async (ctx) => {

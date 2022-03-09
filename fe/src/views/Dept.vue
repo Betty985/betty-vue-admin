@@ -32,14 +32,14 @@
         <el-table-column label="操作">
           <template #default="scope">
             <el-button
-              size="mini"
+              size="small"
               type="primary"
               @click="handleEdit(scope.row)"
               v-has="'dept-edit'"
               >编辑</el-button
             >
             <el-button
-              size="mini"
+              size="small"
               type="danger"
               @click="handleDel(scope.row._id)"
               v-has="'dept-delete'"

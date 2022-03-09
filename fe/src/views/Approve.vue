@@ -36,7 +36,7 @@
                 scope.row.curAuditUserName === userInfo.userName &&
                 [1, 2].includes(scope.row.applyState)
               "
-              size="mini"
+              size="small"
               >审核</el-buton
             >
           </template>
