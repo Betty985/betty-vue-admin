@@ -2,12 +2,10 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import { router } from "./router";
 import ElementPlus from "element-plus";
-import axios from "axios";
 import "element-plus/dist/index.css";
 import storage from "@u/storage.js";
 import request from "@u/request";
 import api from "@/api";
-import config from "./config";
 import store from "./store";
 import * as Icons from "@element-plus/icons-vue";
 let app = createApp(App);
@@ -20,7 +18,9 @@ app.directive("has", {
   // el:是自定义指令应用的元素  binding:是vue提供的
   beforeMount: (el, binding) => {
     // 获取按钮权限
-    let userAction = storage.getItem("userAction");
+    return;
+    let userAction = storage.getItem("actionList");
+
     // 权限标识
     let value = binding.value;
     // 判断列表中是否有对应的按钮权限标识

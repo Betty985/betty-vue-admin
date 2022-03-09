@@ -61,7 +61,7 @@ onMounted(() => {
         :collapse="isCollapse"
         class="nav-menu"
       >
-        <tree-menu :userMenu="userMenu" />
+        <tree-menu :userMenu="userMenu"></tree-menu>
       </el-menu>
     </div>
     <div :class="['content-right', isCollapse ? 'fold' : 'unfold']">
@@ -165,6 +165,9 @@ onMounted(() => {
         .user-link {
           cursor: pointer;
           color: #409eff;
+        }
+        .user-drop {
+          line-height: 3rem;
         }
       }
     }

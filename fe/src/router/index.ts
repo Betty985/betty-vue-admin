@@ -22,7 +22,7 @@ const routerArr = [
         path: "/welcome",
         component: () => import("@v/Welcome.vue"),
         meta: {
-          title: "欢迎页",
+          title: "欢迎使用",
           zyh: true,
         },
       },

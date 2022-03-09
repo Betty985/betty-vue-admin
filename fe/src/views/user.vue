@@ -285,7 +285,7 @@ const handleSubmit = () => {
           v-for="item in columns"
           :key="item.prop"
           :prop="item.prop"
-          :lable="item.label"
+          :label="item.label"
           :formatter="item.formatter"
           :width="item.width"
         ></el-table-column>

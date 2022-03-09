@@ -65,7 +65,6 @@ export default {
       url: "/dept/list",
       method: "get",
       data: {},
-      mock: true,
     });
   },
   deptOperate(params) {

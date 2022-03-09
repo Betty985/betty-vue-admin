@@ -1,5 +1,5 @@
 <template>
-  <div class="user-manage">
+  <div class="menu-manage">
     <div class="query-form">
       <!-- 行内表单 -->
       <el-form :inline="true" ref="form" :model="queryForm">
@@ -27,11 +27,9 @@
     </div>
     <div class="base-table">
       <div class="action">
-        <el-button
-          type="primary"
-          @click="handleAdd(1)"
-          v-has="'menu-create'"
-        ></el-button>
+        <el-button type="primary" @click="handleAdd(1)" v-has="'menu-create'"
+          >创建
+        </el-button>
       </div>
       <!-- 渲染树形菜单需要rolekey -->
       <el-table
@@ -44,7 +42,7 @@
           v-for="item in columns"
           :key="item.prop"
           :prop="item.prop"
-          :lable="item.label"
+          :label="item.label"
           :formatter="item.formatter"
           :width="item.width"
         ></el-table-column>
@@ -292,7 +290,6 @@ function handleSubmit() {
   // valid为false说明校验失败
   proxy.$refs.dialogForm.validate(async (valid) => {
     if (valid) {
-      console.log(menuForm);
       let params = { params: menuForm, action: action.value };
       let res = await proxy.$api.menuSubmit(params);
       showModel.value = false;
