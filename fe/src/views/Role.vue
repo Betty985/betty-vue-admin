@@ -164,17 +164,13 @@ let columns = reactive([
   },
   {
     label: "权限列表",
-    prop: "permissList",
-    width: 200,
-    formatter(row, column, value) {
-      let list = value.halfcheckedKeys || [];
+    prop: "permissionList",
+    formatter: (row, column, value) => {
       let names = [];
+      let list = value.halfCheckedKeys || [];
       list.map((key) => {
         let name = actionMap[key];
-        // 过滤掉空值
-        if (key && name) {
-          names.push(name);
-        }
+        if (key && name) names.push(name);
       });
       return names.join(",");
     },
@@ -195,7 +191,7 @@ let columns = reactive([
   },
 ]);
 // 查询表单 状态默认是正常的
-let queryForm = reactive({ roleName: 1 });
+let queryForm = reactive({});
 const { proxy } = getCurrentInstance();
 const rules = reactive({
   roleName: [
@@ -327,7 +323,7 @@ function getActionMap(list) {
     for (let item of arr) {
       //  菜单下面有按钮  有action说明是最后一级
       if (item.children && item.action) {
-        actionMap[item._id] = item.menuName;
+        map[item._id] = item.menuName;
       }
       // 不是一级菜单，递归子菜单
       if (item.children && !item.action) {

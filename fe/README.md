@@ -151,3 +151,23 @@ document.exitFullscreen();
 # 权限控制
 
 动态指令
+
+server {
+listen 4400;
+server_name localhost;
+location / {
+root /www/wwwroot/admin/fe;
+try_files $uri $uri/ @router;
+            autoindex on;       #开启nginx目录浏览功能
+            autoindex_exact_size off;   #文件大小从KB开始显示
+            charset utf-8;          #显示中文
+            index  index.html index.htm;
+        }
+        location @router{
+            rewrite ^.*$ /index.html last;
+}
+location /api {
+rewrite ^/api/(.\*)$ /$1 break;
+proxy_pass http://localhost:9009;
+}
+}

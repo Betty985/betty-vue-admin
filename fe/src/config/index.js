@@ -1,7 +1,7 @@
 /*
  * 环境变量封装
  */
-const env = import.meta.env.MODE || "prod";
+const env = "development";
 
 const EnvConfig = {
   development: {
@@ -10,19 +10,19 @@ const EnvConfig = {
       "https://www.fastmock.site/mock/c1c302e8baed9894c48c17e4738c092e/api",
   },
   test: {
-    baseApi: "//test.futurefe.com/api",
+    baseApi: "/api",
     mockApi:
       "https://www.fastmock.site/mock/c1c302e8baed9894c48c17e4738c092e/api",
   },
   prod: {
-    baseApi: "//futurefe.com/api",
+    baseApi: "/api",
     mockApi:
       "https://www.fastmock.site/mock/c1c302e8baed9894c48c17e4738c092e/api",
   },
 };
 export default {
   namespace: "manager",
-  env,
+  env: "development",
   mock: false,
   ...EnvConfig[env],
 };

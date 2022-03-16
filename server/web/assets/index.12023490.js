@@ -1,0 +1,1 @@
+import{r as t}from"./index.48e608ee.js";import{d as o,o as s,m as r,s as n}from"./vendor.df9bfe02.js";const a={class:"exception"},l=o({setup(i){function e(){t.push("/")}return(u,c)=>(s(),r("div",a,[n("img",{src:"https://error404.fun/img/illustrations/03@2x.png",alt:"404",onClick:e,title:"\u70B9\u51FB\u56DE\u9996\u9875"})]))}});export{l as default};
