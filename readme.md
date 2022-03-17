@@ -246,7 +246,9 @@ app.use(
 强制推送到远程仓库 git push -f origin master
 变基 git rebase
 
-# 错误
+# 事件透传
+
+# 容错
 
 - `JSON.parse(window.localStorage.getItem(config.namespace) || "{}")`
 

@@ -1,18 +1,17 @@
 <template>
   <el-form-item>
-    <el-input v-if="item.type == 'input'"></el-input>
-    <el-input v-else-if="item.type == 'select'">
+    <el-input v-if="item.type == 'input'" v-bind="item"></el-input>
+    <el-select v-else-if="item.type == 'select'" v-bind="item">
       <el-option
         v-for="option in item.options"
         :key="option.value"
-        :value="option.value"
-        :label="option.label"
+        v-bind="option"
       ></el-option>
-    </el-input>
+    </el-select>
   </el-form-item>
 </template>
-<script>
-export default {
-  props: ["item"],
-};
+<script setup>
+// option的控件要和element ui 对上
+let props = defineProps(["item"]);
+console.log(props);
 </script>

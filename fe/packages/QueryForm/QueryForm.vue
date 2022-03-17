@@ -1,8 +1,8 @@
 <template>
   <div class="hi">
-    <el-form ref="queryForm" :inlne="true" :model="queryModel">
+    <el-form ref="queryForm" :inline="true" :model="queryModel">
       <template v-for="(item, index) in form" :key="index">
-        <FormItem :item="item"></FormItem>
+        <FormItem :item="item" v-bind="item" v-model="item.model"></FormItem>
       </template>
       <el-form-item>
         <el-button @click="handleQuery">查询</el-button>
@@ -32,14 +32,16 @@ export default {
   setup(props, context) {
     const ctx = getCurrentInstance();
     const form = props.form;
-    const queryModel = reactive({});
+    const queryModel = reactive({
+      ...props.modelValue,
+    });
     const handleReset = () => {
       ctx.refs.queryForm.resetField();
     };
     const handleQuery = () => {
       // 优先触发语法糖，再触发自定义事件
       // context.emit("update:modelValue", {'hi':'vue'});
-      context.emit("handleQuery", { hi: "vue" });
+      context.emit("handleQuery", { ...queryModel });
     };
     return {
       queryModel,
