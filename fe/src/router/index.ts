@@ -83,6 +83,7 @@ const routerArr = [
     component: () => import("@/views/404/index.vue"),
   },
 ] as any;
+
 // 创建路由实例
 const router = createRouter({
   history: createWebHashHistory(),
@@ -102,7 +103,7 @@ const router = createRouter({
     });
   },
 });
-
+/*
 // 判断空对象
 function isEmptyObject(obj) {
   return Object.keys(obj).length <= 0;
@@ -149,6 +150,6 @@ async function loadAsyncRoutes() {
     });
   }
 }
-
+*/
 // 导出路由对象
 export { router };

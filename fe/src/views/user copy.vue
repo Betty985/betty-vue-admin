@@ -6,47 +6,9 @@ import { toRaw } from "vue";
 
 // 获取Composition API的上下文对象
 const { proxy } = getCurrentInstance();
-const form = [
-  {
-    type: "input",
-    label: "用户ID",
-    model: "userId",
-    placeholder: "请输入用户id",
-  },
-  {
-    type: "input",
-    label: "用户名称",
-    model: "userName",
-    placeholder: "请输入用户名称",
-  },
-  {
-    type: "select",
-    label: "状态",
-    model: "state",
-    placeholder: "请选择状态",
-    options: [
-      {
-        label: "所有",
-        value: 0,
-      },
-      {
-        label: "在职",
-        value: 1,
-      },
-      {
-        label: "离职",
-        value: 2,
-      },
-      {
-        label: "试用期",
-        value: 3,
-      },
-    ],
-  },
-];
 // reactive一般创建引用类型，ref一般创建基本类型
 // 初始化用户表单对象
-const user = ref({
+const user = reactive({
   state: 1,
 });
 // ref定义的对象通过.value进行赋值
@@ -68,7 +30,7 @@ const userForm = reactive({
   state: 3,
 });
 // 查询事件，获取用户列表
-const handleQuery = function (values) {
+const handleQuery = function () {
   getUserList();
 };
 // 重置查询表单
@@ -277,11 +239,32 @@ const handleSubmit = () => {
 <template>
   <div class="user-manage">
     <div class="query-form">
-      <query-form
-        :form="form"
-        v-model="user"
-        @handleQuery="handleQuery"
-      ></query-form>
+      行内表单
+      <el-form :inline="true" ref="form" :model="user">
+        <!-- 不设置prop会导致无法重置，通过prop添加底层是可以获取到的 -->
+        <el-form-item label="用户ID" prop="userId">
+          <el-input v-model="user.userId" placeholder="请输入用户ID"></el-input>
+        </el-form-item>
+        <el-form-item label="用户名称" prop="userName">
+          <el-input
+            v-model="user.userName"
+            placeholder="请输入用户名称"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="状态" prop="state">
+          <el-select placeholder="请选择用户状态" v-model="user.state">
+            <!-- 该处动态绑定是数值类型，直接写是字符串类型 -->
+            <el-option :value="0" label="所有"></el-option>
+            <el-option :value="1" label="在职"></el-option>
+            <el-option :value="2" label="离职"></el-option>
+            <el-option :value="3" label="试用期"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="handleQuery">查询</el-button>
+          <el-button @click="handleReset('form')">重置</el-button>
+        </el-form-item>
+      </el-form>
     </div>
     <div class="base-table">
       <div class="action">
@@ -406,3 +389,5 @@ const handleSubmit = () => {
     </el-dialog>
   </div>
 </template>
+
+<style scoped></style>

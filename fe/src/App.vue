@@ -1,16 +1,16 @@
 <template>
   <div>
-    <!-- <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component }">
       <keep-alive v-if="route.meta.zyh">
         <component :is="Component" />
       </keep-alive>
       <component v-else :is="Component" />
-    </router-view> -->
-    <v-input
+    </router-view>
+    <!-- <v-input
       v-model="name"
       v-model:title="title"
       @handleSubmit="handleSubmit"
-    ></v-input>
+    ></v-input> -->
   </div>
 </template>
 <style lang="scss">
