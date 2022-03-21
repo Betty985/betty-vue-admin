@@ -2,7 +2,11 @@
   <div class="hi">
     <el-form ref="queryForm" :inline="true" :model="queryModel">
       <template v-for="(item, index) in form" :key="index">
-        <FormItem :item="item" v-bind="item" v-model="item.model"></FormItem>
+        <FormItem
+          :item="item"
+          v-bind="item"
+          v-model="queryModel[item.model]"
+        ></FormItem>
       </template>
       <el-form-item>
         <el-button @click="handleQuery">查询</el-button>
@@ -36,7 +40,7 @@ export default {
       ...props.modelValue,
     });
     const handleReset = () => {
-      ctx.refs.queryForm.resetField();
+      ctx.refs.queryForm.resetFields();
     };
     const handleQuery = () => {
       // 优先触发语法糖，再触发自定义事件

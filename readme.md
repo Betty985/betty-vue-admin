@@ -168,6 +168,24 @@ localstorage 防止覆盖：命名空间
 
 json 格式的 key 必须是双引号
 
+### 补充
+
+8:queryForm.vue
+
+```html
+<el-form ref="queryForm" :inline="true" :model="queryModel">
+  <template v-for="(item, index) in form" :key="index">
+    <!--  queryModel[item.model]为了聚合到queryModel里去-->
+    <FormItem
+      :item="item"
+      v-bind="item"
+      v-model="queryModel[item.model]"
+    ></FormItem>
+  </template>
+  <el-form-item></el-form-item
+></el-form>
+```
+
 # koa 架构设计
 
 全局下载 koa
@@ -246,7 +264,10 @@ app.use(
 强制推送到远程仓库 git push -f origin master
 变基 git rebase
 
-# 事件透传
+# 属性和事件透传
+
+vue2 版本是 attrs 进行属性透传，listener 进行事件透传
+vue3 中 attrs 是 attrs 和 listener 合二为一
 
 # 容错
 

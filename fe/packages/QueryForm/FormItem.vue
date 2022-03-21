@@ -1,7 +1,8 @@
 <template>
-  <el-form-item>
-    <el-input v-if="item.type == 'input'" v-bind="item"></el-input>
-    <el-select v-else-if="item.type == 'select'" v-bind="item">
+  <!-- prop保证重置成功 -->
+  <el-form-item :prop="item.model">
+    <el-input v-if="item.type == 'input'" v-bind="$attrs"></el-input>
+    <el-select v-else-if="item.type == 'select'" v-bind="$attrs">
       <el-option
         v-for="option in item.options"
         :key="option.value"

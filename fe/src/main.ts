@@ -7,7 +7,7 @@ import storage from "@u/storage.js";
 import request from "@u/request";
 import api from "@/api";
 import store from "./store";
-import QueryForm from "./../packages/QueryForm/index.js";
+import packages from "./../packages";
 import * as Icons from "@element-plus/icons-vue";
 let app = createApp(App);
 // 注册Icons 全局组件
@@ -43,5 +43,5 @@ app.config.globalProperties.$request = request;
 app.use(router);
 // use会把它挂载到globalProperties上面去
 // use方法会执行index.js 全局注册组件
-app.use(store).use(QueryForm);
+app.use(store).use(packages);
 app.mount("#app");

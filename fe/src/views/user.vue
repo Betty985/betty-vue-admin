@@ -116,6 +116,16 @@ const rules = reactive({
     },
   ],
 });
+// 定义基础表格操作按钮
+const operation = reactive([
+  {
+    type: "primary",
+    text: "编辑",
+  },
+  {
+    text: "删除",
+  },
+]);
 // 定义动态表格的格式
 const columns = reactive([
   {
@@ -283,56 +293,28 @@ const handleSubmit = () => {
         @handleQuery="handleQuery"
       ></query-form>
     </div>
-    <div class="base-table">
-      <div class="action">
-        <el-button type="primary" @click="handleCreate" v-has="'user-create'"
-          >新增</el-button
-        >
-        <el-button
-          type="danger"
-          @click="handlePatchDel"
-          v-has="'user-patch-delete'"
-          >批量删除</el-button
-        >
-      </div>
-      <el-table :data="userList" @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="55" />
-        <el-table-column
-          v-for="item in columns"
-          :key="item.prop"
-          :prop="item.prop"
-          :label="item.label"
-          :formatter="item.formatter"
-          :width="item.width"
-        ></el-table-column>
-        <el-table-column label="操作" width="150">
-          <template #default="scope">
-            <el-button
-              @click="handleEdit(scope.row)"
-              size="small"
-              v-has="'user-eidt'"
-              >编辑</el-button
-            >
-            <!-- 当前对象这一行 -->
-            <el-button
-              type="danger"
-              @click="handleDel(scope.row)"
-              size="small"
-              v-has="'user-delete'"
-              >删除</el-button
-            >
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        class="pagination"
-        background
-        layout="prev, pager, next"
-        :total="1000"
-        :pageSize="pager.pageSize"
-        @current-change="handleCurrentChange"
-      />
-    </div>
+    <base-table
+      :columns="columns"
+      :data="userList"
+      @selection-change="handleSelectionChange"
+      :selection="1"
+      :action="action"
+      :operation="operation"
+    >
+      <template #action>
+        <div class="action">
+          <el-button type="primary" @click="handleCreate" v-has="'user-create'"
+            >新增</el-button
+          >
+          <el-button
+            type="danger"
+            @click="handlePatchDel"
+            v-has="'user-patch-delete'"
+            >批量删除</el-button
+          >
+        </div>
+      </template>
+    </base-table>
     <el-dialog :title="title" v-model="showModel">
       <!-- ref和model的值一样会导致表单无法输入 -->
       <el-form
