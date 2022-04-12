@@ -151,7 +151,7 @@ document.exitFullscreen();
 # 权限控制
 
 动态指令
-
+```
 server {
 listen 4400;
 server_name localhost;
@@ -171,3 +171,4 @@ rewrite ^/api/(.\*)$ /$1 break;
 proxy_pass http://localhost:9009;
 }
 }
+```
